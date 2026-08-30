@@ -13,6 +13,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+<link rel="apple-touch-icon" href="assets/favicon-180.png" />
 </head>
 <body>
 
@@ -74,8 +77,9 @@
       <div class="form-card">
         <div id="form-success">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none"><circle cx="12" cy="12" r="10" fill="#3fc45b" stroke="#14181a" stroke-width="2"/><path d="M8 12.5l2.5 2.5L16 9" stroke="#14181a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
-          Thanks — your message looks good. (This is a front-end demo, so nothing was actually sent yet — wire this form up to your backend or a form service.)
+          Message sent — I'll get back to you within a couple of days.
         </div>
+        <div id="form-error" style="display:none; padding:1rem 1.25rem; background:#fee2e2; border:1px solid #fecaca; border-radius:var(--radius); font-size:0.95rem; font-weight:500; color:#b91c1c; margin-bottom:1.5rem;"></div>
         <form id="contact-form" novalidate>
           <div class="field">
             <label for="name">Your name</label>

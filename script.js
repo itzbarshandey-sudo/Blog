@@ -104,41 +104,83 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 6. Contact Form Validation
+  // 6. Contact Form — validation + backend submission
   const contactForm = document.getElementById('contact-form');
   const formCard = document.querySelector('.form-card');
-  
+  const formError = document.getElementById('form-error');
+  const submitBtn = contactForm ? contactForm.querySelector('button[type="submit"]') : null;
+
+  // Backend URL — update this to your server's public URL when deployed
+  // e.g. 'https://your-server.com/api/contact'
+  const CONTACT_API = '/api/contact';
+
   if (contactForm && formCard) {
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       let isValid = true;
-      
+
       // Reset errors
       document.querySelectorAll('.field.error').forEach(f => f.classList.remove('error'));
-      
+      if (formError) formError.style.display = 'none';
+
       const name = contactForm.elements['name'];
       const email = contactForm.elements['email'];
       const message = contactForm.elements['message'];
-      
+
       if (!name.value || name.value.trim().length < 2) {
         name.closest('.field').classList.add('error');
         isValid = false;
       }
-      
+
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!email.value || !emailRegex.test(email.value)) {
         email.closest('.field').classList.add('error');
         isValid = false;
       }
-      
+
       if (!message.value || message.value.trim().length < 10) {
         message.closest('.field').classList.add('error');
         isValid = false;
       }
-      
-      if (isValid) {
-        formCard.classList.add('success-mode');
-        // In a real app, you would send the data here.
+
+      if (!isValid) return;
+
+      // Loading state
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending…';
+      }
+
+      try {
+        const res = await fetch(CONTACT_API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: name.value.trim(),
+            email: email.value.trim(),
+            topic: contactForm.elements['topic'].value,
+            message: message.value.trim(),
+          }),
+        });
+
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+          formCard.classList.add('success-mode');
+        } else {
+          throw new Error(data.error || 'Unexpected error.');
+        }
+      } catch (err) {
+        if (formError) {
+          formError.textContent = err.message || 'Something went wrong — please email me directly.';
+          formError.style.display = 'block';
+        }
+        console.error('Contact form error:', err);
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Send message';
+        }
       }
     });
 
