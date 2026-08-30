@@ -110,10 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const formError = document.getElementById('form-error');
   const submitBtn = contactForm ? contactForm.querySelector('button[type="submit"]') : null;
 
-  // Backend URL — your Vercel project URL + /api/contact
-  // Replace this with your actual Vercel URL after deploying:
-  // e.g. 'https://blog-xyz123.vercel.app/api/contact'
-  const CONTACT_API = 'https://YOUR-PROJECT.vercel.app/api/contact';
+  // Backend URL — Vercel serverless function
+  const CONTACT_API = 'https://blog-pied-one-75.vercel.app/api/contact';
 
   if (contactForm && formCard) {
     contactForm.addEventListener('submit', async (e) => {
