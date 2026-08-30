@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact — Node | Barshan Dey</title>
+<meta name="description" content="Get in touch with Barshan Dey about a blog post, a collaboration, or a responsible disclosure." />
+<link rel="canonical" href="https://node.barshandey.dev/contact.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Node" />
+<meta property="og:title" content="Contact — Node" />
+<meta property="og:description" content="Get in touch about a blog post, a collaboration, or a responsible disclosure." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <svg class="badge-mark" viewBox="0 0 48 48" fill="none">
+        <path d="M24 4 L42 11 V22 C42 33 34.5 41 24 44 C13.5 41 6 33 6 22 V11 Z" fill="#3fc45b" stroke="#14181a" stroke-width="2.5" stroke-linejoin="round"/>
+        <path d="M16 24 L21.5 29.5 L33 17" stroke="#14181a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      Node
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="resume.html">Resume</a></li>
+      <li><a href="contact.html" class="active nav-cta">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" style="padding:60px 0 50px;">
+  <div class="wrap" style="grid-template-columns:1fr;">
+    <div class="hero-copy">
+      <span class="eyebrow"><span class="dot"></span> Usually reply within 2 days</span>
+      <h1 style="font-size:clamp(34px,5vw,54px);">Let's talk</h1>
+      <p class="hero-sub">Responsible disclosure, a question about a post, a collab idea — whatever it is, this goes straight to me, not a support queue.</p>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="contact-grid">
+
+      <div class="contact-info">
+        <div class="card">
+          <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="12" rx="2" fill="none" stroke="#14181a" stroke-width="2"/><path d="M3 7l9 6 9-6" stroke="#14181a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>Email</h3>
+          <a class="link-row" href="mailto:hello@nodeblog.dev">hello@nodeblog.dev</a>
+        </div>
+        <div class="card">
+          <div class="icon-badge" style="background:#e4f2ff;"><svg viewBox="0 0 24 24" fill="none"><rect x="5" y="10" width="14" height="10" rx="2" fill="none" stroke="#14181a" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="#14181a" stroke-width="2" fill="none"/></svg></div>
+          <h3>Security disclosure</h3>
+          <p style="margin-bottom:10px;">Found a vulnerability in something I built? Please report it responsibly.</p>
+          <a class="link-row" href="mailto:security@nodeblog.dev">security@nodeblog.dev</a>
+        </div>
+        <div class="card">
+          <div class="icon-badge" style="background:#fff6cf;"><svg viewBox="0 0 24 24" fill="none"><path d="M4 9c4-3 12-3 16 0M6 13c3.2-2 8.8-2 12 0M9 17c1.6-1 3.4-1 5 0" stroke="#14181a" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7" r="1.4" fill="#14181a"/></svg></div>
+          <h3>Elsewhere online</h3>
+          <p style="margin-bottom:10px;">GitHub, LinkedIn, and Mastodon — links in the footer.</p>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <div id="form-success">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none"><circle cx="12" cy="12" r="10" fill="#3fc45b" stroke="#14181a" stroke-width="2"/><path d="M8 12.5l2.5 2.5L16 9" stroke="#14181a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          Thanks — your message looks good. (This is a front-end demo, so nothing was actually sent yet — wire this form up to your backend or a form service.)
+        </div>
+        <form id="contact-form" novalidate>
+          <div class="field">
+            <label for="name">Your name</label>
+            <input type="text" id="name" name="name" placeholder="Jordan Lee" autocomplete="name" />
+            <div class="field-error">Please enter at least 2 characters.</div>
+          </div>
+          <div class="field">
+            <label for="email">Email address</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" />
+            <div class="field-error">Please enter a valid email address.</div>
+          </div>
+          <div class="field">
+            <label for="topic">What's this about</label>
+            <select id="topic" name="topic">
+              <option>General question</option>
+              <option>Blog post feedback</option>
+              <option>Security disclosure</option>
+              <option>Collaboration idea</option>
+              <option>Something else</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="What's on your mind?"></textarea>
+            <div class="field-error">Please write at least 10 characters.</div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Send message</button>
+          <p class="form-note">This form validates in the browser only — connect it to a real endpoint before going live.</p>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>Node</h4>
+        <p>Barshan Dey's cybersecurity learning journal — network security, ethical hacking, and staying safe online.</p>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="resume.html">Resume</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Elsewhere</h4>
+        <ul class="footer-links">
+          <li><a href="#">GitHub</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Mastodon</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Barshan Dey. Built as a personal project, not a product.</span>
+      <span>Node — base template, ready to customize.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

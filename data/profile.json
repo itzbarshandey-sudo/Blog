@@ -1,0 +1,32 @@
+{
+  "email": "itzbarshandey@gmail.com",
+  "github": "https://github.com/itzbarshandey-sudo",
+  "githubUser": "itzbarshandey-sudo (Oops2Ops)",
+  "youtube": "https://www.youtube.com/@itsmeNode",
+  "stats": [
+    { "num": "0+", "label": "CTF challenges solved" },
+    { "num": "0", "label": "Blog posts written" },
+    { "num": "0", "label": "Home labs built & broken" },
+    { "num": "0", "label": "OSCP attempt (in progress)" }
+  ],
+  "skills": [
+    "Python",
+    "Linux"
+  ],
+  "certifications": [],
+  "learningPath": [],
+  "education": {
+    "institution": "Narayana",
+    "status": "Student",
+    "details": "School student at Narayana, independently learning Python, Linux, and cybersecurity fundamentals."
+  },
+  "projects": [
+    {
+      "title": "Node — Cybersecurity Journal",
+      "description": "Designed and built this site as a personal security journal, portfolio, and learning hub.",
+      "icon": "globe",
+      "tag": "Web / Portfolio",
+      "link": "https://github.com/itzbarshandey-sudo"
+    }
+  ]
+}

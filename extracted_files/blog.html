@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Blog — Node | Barshan Dey</title>
+<meta name="description" content="Notes and write-ups on network security, ethical hacking, and everyday digital safety — Barshan Dey's cybersecurity learning journal." />
+<link rel="canonical" href="https://node.barshandey.dev/blog.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Node" />
+<meta property="og:title" content="Blog — Node" />
+<meta property="og:description" content="Notes and write-ups on network security, ethical hacking, and everyday digital safety." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <svg class="badge-mark" viewBox="0 0 48 48" fill="none">
+        <path d="M24 4 L42 11 V22 C42 33 34.5 41 24 44 C13.5 41 6 33 6 22 V11 Z" fill="#3fc45b" stroke="#14181a" stroke-width="2.5" stroke-linejoin="round"/>
+        <path d="M16 24 L21.5 29.5 L33 17" stroke="#14181a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      Node
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="blog.html" class="active">Blog</a></li>
+      <li><a href="resume.html">Resume</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" style="padding:60px 0 50px;">
+  <div class="wrap" style="grid-template-columns:1fr;">
+    <div class="hero-copy">
+      <span class="eyebrow"><span class="dot"></span> Written &amp; published from Markdown</span>
+      <h1 style="font-size:clamp(34px,5vw,54px);">The blog</h1>
+      <p class="hero-sub">Write-ups, checklists, and things I learned the hard way. Every post here is a plain <code>.md</code> file in the repo — filter by topic below.</p>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+
+    <div id="featured-slot"></div>
+
+    <div class="filter-bar" role="group" aria-label="Filter posts by category">
+      <button class="filter-pill" data-filter="all" aria-pressed="true">All posts</button>
+      <button class="filter-pill" data-filter="network" aria-pressed="false">Network</button>
+      <button class="filter-pill" data-filter="web" aria-pressed="false">Write-ups</button>
+      <button class="filter-pill" data-filter="malware" aria-pressed="false">Malware</button>
+      <button class="filter-pill" data-filter="privacy" aria-pressed="false">Privacy</button>
+      <button class="filter-pill" data-filter="awareness" aria-pressed="false">Awareness</button>
+    </div>
+
+    <div class="post-grid" id="post-grid">
+      <p class="loading-state" style="grid-column:1/-1;">Loading posts&hellip;</p>
+    </div>
+  </div>
+</section>
+
+<section class="band-mint">
+  <div class="wrap" style="text-align:center;">
+    <span class="eyebrow"><span class="dot"></span> That's everything, for now</span>
+    <h2 style="margin-bottom:10px;">Have a question about a post?</h2>
+    <p style="max-width:50ch;margin:0 auto 24px;">I'm always happy to go deeper on anything I've written, or hear about what you're working on.</p>
+    <a href="contact.html" class="btn btn-dark">Get in touch</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>Node</h4>
+        <p>Barshan Dey's cybersecurity learning journal — network security, ethical hacking, and staying safe online.</p>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="resume.html">Resume</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Elsewhere</h4>
+        <ul class="footer-links">
+          <li><a href="#">GitHub</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Mastodon</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Barshan Dey. Built as a personal project, not a product.</span>
+      <span>Node — base template, ready to customize.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script src="blog.js"></script>
+</body>
+</html>
