@@ -1,4 +1,23 @@
 /* style.css */
+
+/* Fallback fonts sized to match web fonts — reduces layout shift (CLS) */
+@font-face {
+  font-family: 'Inter Fallback';
+  src: local('Arial');
+  ascent-override: 90%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+  size-adjust: 107%;
+}
+@font-face {
+  font-family: 'Baloo 2 Fallback';
+  src: local('Arial');
+  ascent-override: 95%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+  size-adjust: 112%;
+}
+
 :root {
   --paper: #ffffff;
   --paper-alt: #f8fafc;
@@ -19,8 +38,8 @@
   --shadow-hover: 0 20px 40px rgba(15, 23, 42, 0.12);
   --stick-shadow: 0 12px 32px rgba(63, 196, 91, 0.15);
 
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --font-display: 'Baloo 2', system-ui, sans-serif;
+  --font-sans: 'Inter', 'Inter Fallback', system-ui, sans-serif;
+  --font-display: 'Baloo 2', 'Baloo 2 Fallback', system-ui, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
