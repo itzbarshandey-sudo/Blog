@@ -1,6 +1,21 @@
 /* script.js */
 document.addEventListener('DOMContentLoaded', () => {
 
+  // Preload critical resources to break dependency chain
+  const preloadProfile = document.createElement('link');
+  preloadProfile.rel = 'preload';
+  preloadProfile.href = 'data/profile.json';
+  preloadProfile.as = 'fetch';
+  preloadProfile.crossOrigin = 'anonymous';
+  document.head.appendChild(preloadProfile);
+
+  const preloadManifest = document.createElement('link');
+  preloadManifest.rel = 'preload';
+  preloadManifest.href = 'posts/manifest.json';
+  preloadManifest.as = 'fetch';
+  preloadManifest.crossOrigin = 'anonymous';
+  document.head.appendChild(preloadManifest);
+
   // 0. Hero Terminal Typewriter Animation
   const heroSub = document.querySelector('.hero .hero-sub');
   if (heroSub) {
@@ -72,35 +87,66 @@ document.addEventListener('DOMContentLoaded', () => {
     revealOnScroll.observe(section);
   });
 
-  // 4. Hero Sticker Parallax (Mouse movement tracking)
+  // 4. Hero Sticker Parallax (Mouse movement tracking) - Optimized to prevent forced reflows
   const heroArt = document.querySelector('.hero-art');
   const stickers = document.querySelectorAll('.sticker');
-  
-  if (heroArt && stickers.length > 0) {
-    window.addEventListener('mousemove', (e) => {
-      // Calculate mouse position relative to the window center
-      const mouseX = (e.clientX - window.innerWidth / 2) / 50;
-      const mouseY = (e.clientY - window.innerHeight / 2) / 50;
+  let mouseMoveRequested = false;
 
-      stickers.forEach((sticker, index) => {
-        // Vary the speed slightly based on index
-        const speed = 1 + (index * 0.2);
-        sticker.style.setProperty('--mx', mouseX * speed);
-        sticker.style.setProperty('--my', mouseY * speed);
-      });
-    });
+  if (heroArt && stickers.length > 0) {
+    // Throttle mousemove to prevent layout thrashing
+    const throttledMouseMove = (() => {
+      let timeout;
+      return (e) => {
+        if (!timeout) {
+          timeout = setTimeout(() => {
+            // Calculate mouse position relative to the window center
+            const mouseX = (e.clientX - window.innerWidth / 2) / 50;
+            const mouseY = (e.clientY - window.innerHeight / 2) / 50;
+
+            stickers.forEach((sticker, index) => {
+              // Vary the speed slightly based on index
+              const speed = 1 + (index * 0.2);
+              // Use transform3d to avoid reflows
+              sticker.style.transform = `translate3d(${mouseX * speed}px, ${mouseY * speed}px, 0)`;
+            });
+
+            timeout = null;
+          }, 16); // ~60fps
+        }
+      };
+    })();
+
+    window.addEventListener('mousemove', throttledMouseMove, { passive: true });
   }
 
-  // 5. Card Hover Glow Effect
+  // 5. Card Hover Glow Effect - Optimized to prevent forced reflows
   const cards = document.querySelectorAll('.card');
+  let cardAnimationFrame;
+
   cards.forEach(card => {
     card.addEventListener('mousemove', (e) => {
+      // Cancel previous animation frame to prevent accumulation
+      if (cardAnimationFrame) {
+        cancelAnimationFrame(cardAnimationFrame);
+      }
+
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-      
-      card.style.setProperty('--mouse-x', `${x}px`);
-      card.style.setProperty('--mouse-y', `${y}px`);
+
+      // Use requestAnimationFrame for smooth transforms
+      cardAnimationFrame = requestAnimationFrame(() => {
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
+    });
+
+    // Cleanup on mouse leave
+    card.addEventListener('mouseleave', () => {
+      if (cardAnimationFrame) {
+        cancelAnimationFrame(cardAnimationFrame);
+        cardAnimationFrame = null;
+      }
     });
   });
 
@@ -194,22 +240,81 @@ document.addEventListener('DOMContentLoaded', () => {
     
   // 7. Dynamic Data Loader (Live updates via data/profile.json & posts/manifest.json)
   
-  // A. Home Page: Dynamic Stats Loader
+  // A. Home Page: Dynamic Stats Loader - Optimized to prevent layout shifts
   const statStrip = document.getElementById('stat-strip');
   if (statStrip) {
-    fetch('data/profile.json')
-      .then(res => res.ok ? res.json() : null)
-      .then(profile => {
+    // Try to use embedded profile data first to break dependency chain
+    const embeddedProfile = document.getElementById('profile-data');
+    if (embeddedProfile) {
+      try {
+        const profile = JSON.parse(embeddedProfile.textContent);
         if (profile && Array.isArray(profile.stats) && profile.stats.length > 0) {
-          statStrip.innerHTML = profile.stats.map(s => `
-            <div>
+          const statItems = profile.stats.map(s => `
+            <div class="stat-item">
               <div class="num">${s.num}</div>
               <div class="label">${s.label}</div>
             </div>
           `).join('');
+
+          // Create temporary container to avoid layout shift
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = statItems;
+          const statItemsArray = Array.from(tempDiv.children);
+
+          // Calculate total height first
+          const totalHeight = statItemsArray.reduce((sum, item) => {
+            const height = item.offsetHeight;
+            return sum + height;
+          }, 0);
+
+          // Set height before updating to prevent layout shift
+          statStrip.style.minHeight = `${totalHeight}px`;
+
+          // Update content
+          statStrip.innerHTML = statItems;
+          return; // Exit early - no fetch needed
         }
+      } catch (e) {
+        console.warn('Failed to parse embedded profile data:', e);
+      }
+    }
+
+    // Fallback to fetch if embedded data not available or invalid
+    statStrip.classList.add('loading');
+
+    fetch('data/profile.json')
+      .then(res => res.ok ? res.json() : null)
+      .then(profile => {
+        if (profile && Array.isArray(profile.stats) && profile.stats.length > 0) {
+          const statItems = profile.stats.map(s => `
+            <div class="stat-item">
+              <div class="num">${s.num}</div>
+              <div class="label">${s.label}</div>
+            </div>
+          `).join('');
+
+          statStrip.innerHTML = statItems;
+        } else {
+          // Fallback for missing data
+          statStrip.innerHTML = `
+            <div class="stat-item">
+              <div class="num">0</div>
+              <div class="label">No stats available</div>
+            </div>
+          `;
+        }
+        statStrip.classList.remove('loading');
       })
-      .catch(() => {});
+      .catch(() => {
+        // Error state with proper structure
+        statStrip.innerHTML = `
+          <div class="stat-item">
+            <div class="num">—</div>
+            <div class="label">Loading error</div>
+          </div>
+        `;
+        statStrip.classList.remove('loading');
+      });
   }
 
   // B. Home Page: Dynamic Recent Blog Posts Loader

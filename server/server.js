@@ -7,6 +7,7 @@ const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const nodemailer = require('nodemailer');
 const { body, validationResult } = require('express-validator');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -15,6 +16,33 @@ const PORT = process.env.PORT || 3001;
 
 // Security headers
 app.use(helmet());
+
+// Serve static files with proper cache headers for performance
+// Cache images, fonts, and CSS for 1 year (immutable)
+// Cache HTML and JSON for 1 hour
+app.use((req, res, next) => {
+  const ext = path.extname(req.path).toLowerCase();
+  if (['.webp', '.jpg', '.jpeg', '.png', '.gif', '.svg', '.ico'].includes(ext)) {
+    // Images - 1 year cache
+    res.set('Cache-Control', 'public, max-age=31536000, immutable');
+  } else if (['.css', '.js', '.woff2', '.woff', '.ttf'].includes(ext)) {
+    // Static assets - 1 year cache
+    res.set('Cache-Control', 'public, max-age=31536000, immutable');
+  } else if (['.html', '.json', '.md'].includes(ext) || req.path === '/') {
+    // HTML and dynamic data - 1 hour cache, revalidate after
+    res.set('Cache-Control', 'public, max-age=3600, must-revalidate');
+  } else {
+    // Default - 1 day cache
+    res.set('Cache-Control', 'public, max-age=86400');
+  }
+  next();
+});
+
+app.use(express.static(path.join(__dirname, '..'), {
+  maxAge: '1y',
+  etag: true,
+  lastModified: true,
+}));
 
 // CORS — allow your frontend origin (update for production)
 app.use(cors({
