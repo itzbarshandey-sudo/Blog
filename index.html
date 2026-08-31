@@ -17,8 +17,11 @@
 <meta name="twitter:description" content="Cybersecurity learning notes, blog write-ups, and a resume, built while working toward a career in security." />
 <meta name="twitter:image" content="/assets/og-image.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="style.css"></noscript>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap"></noscript>
 </head>
 <body>
 
@@ -57,7 +60,7 @@
       </div>
     </div>
     <div class="hero-art" aria-hidden="true">
-      <img src="assets/mascot.webp" alt="Mascot" class="hero-mascot" />
+      <img src="assets/mascot.webp" alt="Mascot" class="hero-mascot" fetchpriority="high" width="380" height="396" />
       <div class="sticker s1">
         <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="10" width="14" height="10" rx="2" fill="#dcfbe0" stroke="#14181a" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="#14181a" stroke-width="2" fill="none"/></svg>
         Passwords locked
