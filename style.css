@@ -4,6 +4,7 @@
 @font-face {
   font-family: 'Inter Fallback';
   src: local('Arial');
+  font-display: swap;
   ascent-override: 90%;
   descent-override: 22%;
   line-gap-override: 0%;
@@ -12,6 +13,7 @@
 @font-face {
   font-family: 'Baloo 2 Fallback';
   src: local('Arial');
+  font-display: swap;
   ascent-override: 95%;
   descent-override: 25%;
   line-gap-override: 0%;
