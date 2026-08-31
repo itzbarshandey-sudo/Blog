@@ -7,7 +7,8 @@
     "start": "node server/server.js",
     "dev": "npx nodemon server/server.js",
     "serve": "npx http-server . -p 8000 -c-1",
-    "preview": "npx concurrently \"npm run serve\" \"npm run dev\""
+    "preview": "npx concurrently \"npm run serve\" \"npm run dev\"",
+    "compress": "node scripts/compress-images.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -19,7 +20,8 @@
     "nodemailer": "^6.9.14"
   },
   "devDependencies": {
-    "nodemon": "^3.1.4"
+    "nodemon": "^3.1.4",
+    "sharp": "^0.33.5"
   },
   "engines": {
     "node": ">=18.0.0"
