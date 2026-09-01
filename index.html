@@ -16,6 +16,16 @@
 <meta name="twitter:title" content="Node — Barshan Dey's Cybersecurity Journal" />
 <meta name="twitter:description" content="Cybersecurity learning notes, blog write-ups, and a resume, built while working toward a career in security." />
 <meta name="twitter:image" content="/assets/og-image.png" />
+<style>
+/* Critical CSS - Inline to prevent CLS */
+@font-face{font-family:'Inter Fallback';src:local('Arial');font-display:swap;ascent-override:90%;descent-override:22%;line-gap-override:0%;size-adjust:107%}
+@font-face{font-family:'Baloo 2 Fallback';src:local('Arial');font-display:swap;ascent-override:95%;descent-override:25%;line-gap-override:0%;size-adjust:112%}
+:root{--font-sans:'Inter','Inter Fallback',system-ui,sans-serif;--font-display:'Baloo 2','Baloo 2 Fallback',system-ui,sans-serif}
+body{font-family:var(--font-sans);margin:0;padding:0}
+h1,h2,h3,h4,.brand{font-family:var(--font-display)}
+.hero-art{min-height:480px;contain:layout style paint}
+.hero-sub{min-height:5em;contain:layout style}
+</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
