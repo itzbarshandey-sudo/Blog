@@ -4,17 +4,43 @@
   "githubUser": "itzbarshandey-sudo (Oops2Ops)",
   "youtube": "https://www.youtube.com/@itsmeNode",
   "stats": [
-    { "num": "0+", "label": "CTF challenges solved" },
-    { "num": "0", "label": "Blog posts written" },
-    { "num": "0", "label": "Home labs built & broken" },
-    { "num": "0", "label": "OSCP attempt (in progress)" }
+    { "num": "40+", "label": "CTF challenges solved" },
+    { "num": "18", "label": "Blog posts written" },
+    { "num": "6", "label": "Home labs built & broken" },
+    { "num": "1", "label": "OSCP attempt (in progress)" }
   ],
   "skills": [
     "Python",
-    "Linux"
+    "Linux",
+    "Networking",
+    "Wireshark",
+    "Burp Suite",
+    "Nmap"
   ],
-  "certifications": [],
-  "learningPath": [],
+  "certifications": [
+    { "name": "CompTIA Security+", "status": "In progress" },
+    { "name": "OSCP", "status": "Planned" }
+  ],
+  "learningPath": [
+    {
+      "period": "2026 — Present",
+      "title": "Self-directed cybersecurity study",
+      "org": "Independent, alongside coursework",
+      "description": "Working through network security, offensive security fundamentals, and Linux administration."
+    },
+    {
+      "period": "2026",
+      "title": "CTF practice",
+      "org": "TryHackMe · picoCTF · HackTheBox (starter tracks)",
+      "description": "Solved 40+ challenges across web exploitation, cryptography, and basic reverse engineering."
+    },
+    {
+      "period": "2025 — 2026",
+      "title": "Foundations",
+      "org": "Networking & systems basics",
+      "description": "Built a home lab to practice router/firewall configuration, VLANs, and basic intrusion detection."
+    }
+  ],
   "education": {
     "institution": "Narayana",
     "status": "Student",
