@@ -20,7 +20,7 @@
   <div class="wrap">
     <a href="index.html" class="brand">
       <svg class="badge-mark" viewBox="0 0 48 48" fill="none">
-        <path d="M24 4 L42 11 V22 C42 33 34.5 41 24 44 C13.5 41 6 33 6 22 V11 Z" fill="#2d9e42" stroke="#14181a" stroke-width="2.5" stroke-linejoin="round"/>
+        <path d="M24 4 L42 11 V22 C42 33 34.5 41 24 44 C13.5 41 6 33 6 22 V11 Z" fill="#3fc45b" stroke="#14181a" stroke-width="2.5" stroke-linejoin="round"/>
         <path d="M16 24 L21.5 29.5 L33 17" stroke="#14181a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
       </svg>
       Node
@@ -37,16 +37,12 @@
   </div>
 </nav>
 
-<main>
-<header class="hero contact-hero">
-  <div class="wrap">
+<header class="hero" style="padding:60px 0 50px;">
+  <div class="wrap" style="grid-template-columns:1fr;">
     <div class="hero-copy">
       <span class="eyebrow"><span class="dot"></span> Usually reply within 2 days</span>
       <h1 style="font-size:clamp(34px,5vw,54px);">Let's talk</h1>
       <p class="hero-sub">Responsible disclosure, a question about a post, a collab idea — whatever it is, this goes straight to me, not a support queue.</p>
-    </div>
-    <div class="contact-hero-art">
-      <img src="assets/mascotcontact.webp" alt="Contact Mascot" class="contact-mascot" loading="lazy" />
     </div>
   </div>
 </header>
@@ -59,22 +55,24 @@
         <div class="card">
           <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="12" rx="2" fill="none" stroke="#14181a" stroke-width="2"/><path d="M3 7l9 6 9-6" stroke="#14181a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           <h3>Email</h3>
-          <a class="link-row" href="mailto:itzbarshandey@gmail.com">itzbarshandey@gmail.com</a>
+          <a class="link-row" href="mailto:hello@nodeblog.dev">hello@nodeblog.dev</a>
         </div>
         <div class="card">
           <div class="icon-badge" style="background:#e4f2ff;"><svg viewBox="0 0 24 24" fill="none"><rect x="5" y="10" width="14" height="10" rx="2" fill="none" stroke="#14181a" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="#14181a" stroke-width="2" fill="none"/></svg></div>
-          <h3>Socials</h3>
-          <p style="margin-bottom:10px;">Check out my GitHub or YouTube channel.</p>
-          <div style="display:flex; flex-direction:column; gap:6px;">
-            <a class="link-row" href="https://github.com/itzbarshandey-sudo" target="_blank" rel="noopener noreferrer">GitHub: itzbarshandey-sudo</a>
-            <a class="link-row" href="https://www.youtube.com/@itsmeNode" target="_blank" rel="noopener noreferrer">YouTube: @itsmeNode</a>
-          </div>
+          <h3>Security disclosure</h3>
+          <p style="margin-bottom:10px;">Found a vulnerability in something I built? Please report it responsibly.</p>
+          <a class="link-row" href="mailto:security@nodeblog.dev">security@nodeblog.dev</a>
+        </div>
+        <div class="card">
+          <div class="icon-badge" style="background:#fff6cf;"><svg viewBox="0 0 24 24" fill="none"><path d="M4 9c4-3 12-3 16 0M6 13c3.2-2 8.8-2 12 0M9 17c1.6-1 3.4-1 5 0" stroke="#14181a" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7" r="1.4" fill="#14181a"/></svg></div>
+          <h3>Elsewhere online</h3>
+          <p style="margin-bottom:10px;">GitHub, LinkedIn, and Mastodon — links in the footer.</p>
         </div>
       </div>
 
       <div class="form-card">
         <div id="form-success">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none"><circle cx="12" cy="12" r="10" fill="#2d9e42" stroke="#14181a" stroke-width="2"/><path d="M8 12.5l2.5 2.5L16 9" stroke="#14181a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none"><circle cx="12" cy="12" r="10" fill="#3fc45b" stroke="#14181a" stroke-width="2"/><path d="M8 12.5l2.5 2.5L16 9" stroke="#14181a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
           Thanks — your message looks good. (This is a front-end demo, so nothing was actually sent yet — wire this form up to your backend or a form service.)
         </div>
         <form id="contact-form" novalidate>
@@ -116,11 +114,11 @@
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <h3>Node</h3>
+        <h4>Node</h4>
         <p>Barshan Dey's cybersecurity learning journal — network security, ethical hacking, and staying safe online.</p>
       </div>
       <div>
-        <h3>Site</h3>
+        <h4>Site</h4>
         <ul class="footer-links">
           <li><a href="index.html">Home</a></li>
           <li><a href="blog.html">Blog</a></li>
@@ -129,24 +127,21 @@
         </ul>
       </div>
       <div>
-        <h3>Elsewhere</h3>
+        <h4>Elsewhere</h4>
         <ul class="footer-links">
-          <li><a href="https://github.com/itzbarshandey-sudo" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-          <li><a href="https://www.youtube.com/@itsmeNode" target="_blank" rel="noopener noreferrer">YouTube</a></li>
-          <li><a href="mailto:itzbarshandey@gmail.com">Email</a></li>
+          <li><a href="#">GitHub</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Mastodon</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>&copy; 2026 itsnode.in. All rights reserved.</span>
+      <span>&copy; 2026 Barshan Dey. Built as a personal project, not a product.</span>
       <span>Node — base template, ready to customize.</span>
     </div>
   </div>
 </footer>
 
-</main>
-
 <script src="script.js"></script>
 </body>
 </html>
-
