@@ -118,6 +118,7 @@ section { padding: 5rem 0; }
   width: 6px; height: 6px; background: var(--accent); border-radius: 50%;
   box-shadow: 0 0 12px var(--accent);
   animation: dot-pulse 2.4s var(--ease-fluid) infinite;
+  flex-shrink: 0;
 }
 @keyframes dot-pulse {
   0%, 100% { opacity: 0.6; transform: scale(1); }
@@ -155,11 +156,12 @@ section { padding: 5rem 0; }
 .hero-mascot {
   width: 100%; max-width: 380px; height: auto;
   filter: drop-shadow(0 20px 48px rgba(0, 0, 0, 0.6));
-  animation: float 6s var(--ease-fluid) infinite alternate;
+  animation: float 4.5s var(--ease-spring) infinite alternate;
+  will-change: transform;
 }
 @keyframes float {
-  0% { transform: translateY(0px); }
-  100% { transform: translateY(-10px); }
+  0% { transform: translateY(0px) rotate(0deg); }
+  100% { transform: translateY(-18px) rotate(0.5deg); }
 }
 
 /* ─── Buttons ─────────────────────────────────────────────────────── */
@@ -198,7 +200,7 @@ section { padding: 5rem 0; }
   width: 6px; height: 6px; background: var(--accent); border-radius: 50%;
   box-shadow: 0 0 8px var(--accent);
 }
-.section-title { max-width: 16ch; }
+.section-title { max-width: 16ch; text-wrap: balance; }
 
 /* ─── Tagline Reveal (B11 mandatory) ───────────────────────────────── */
 .tagline-section {
@@ -226,11 +228,15 @@ section { padding: 5rem 0; }
 }
 .tagline-text .tw {
   display: inline-block;
-  color: rgba(232, 245, 233, 0.18);
-  transition: color 0.9s var(--ease-fluid);
+  color: rgba(232, 245, 233, 0.28);
+  transition: color 0.9s var(--ease-fluid), letter-spacing 0.9s var(--ease-fluid);
   margin-right: 0.25em;
+  letter-spacing: 0.02em;
 }
-.tagline-text .tw.is-active { color: var(--fg); }
+.tagline-text .tw.is-active {
+  color: var(--fg);
+  letter-spacing: -0.01em;
+}
 
 /* ─── Post Grid ───────────────────────────────────────────────────── */
 .post-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
@@ -331,6 +337,33 @@ section { padding: 5rem 0; }
 /* ─── Scroll Reveal ──────────────────────────────────────────────── */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s var(--ease-fluid), transform 0.8s var(--ease-fluid); }
 .reveal.is-active { opacity: 1; transform: translateY(0); }
+
+/* ─── Focus visible: accessibility + keyboard polish ─────────────── */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.nav-toggle:focus-visible { outline-offset: 6px; }
+.field input:focus-visible, .field select:focus-visible, .field textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-glow);
+}
+.filter-pill:focus-visible { outline-offset: 4px; }
+
+/* ─── Reduced motion respect ─────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+  .hero-mascot { animation: none; }
+  .eyebrow-dot { animation: none; }
+}
 
 /* ─── Responsive ─────────────────────────────────────────────────── */
 @media (max-width: 960px) {
