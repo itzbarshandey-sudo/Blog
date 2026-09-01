@@ -1,23 +1,17 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title id="page-title">Post — Node</title>
 <meta id="page-description" name="description" content="A blog post from Node, Barshan Dey's cybersecurity learning journal." />
-<link rel="canonical" href="https://itsnode.in/" />
-<meta property="og:type" content="article" />
-<meta property="og:site_name" content="Node" />
-<meta property="og:url" content="https://itsnode.in/" />
-<meta property="og:image" content="/assets/og-image.png" />
-<meta name="twitter:card" content="summary_large_image" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="style.css"></noscript>
 <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"></noscript>
-<link rel="icon" href="assets/favicon-32.png" type="image/png" />
+<!-- Markdown renderer, loaded from CDN so no build step is required -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js" defer></script>
 </head>
 <body>
@@ -25,7 +19,7 @@
 <nav class="site-nav">
   <div class="wrap">
     <a href="index.html" class="brand">
-      <svg width="28" height="28" viewBox="0 0 48 48" fill="none">
+      <svg class="badge-mark" viewBox="0 0 48 48" fill="none">
         <path d="M24 4 L42 11 V22 C42 33 34.5 41 24 44 C13.5 41 6 33 6 22 V11 Z" fill="#2d9e42" stroke="#e8f5e9" stroke-width="2.5" stroke-linejoin="round"/>
         <path d="M16 24 L21.5 29.5 L33 17" stroke="#0a0f0d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
       </svg>
@@ -43,21 +37,18 @@
   </div>
 </nav>
 
-<main>
-<header class="hero hero-page" style="padding-bottom: 0;">
-  <div class="wrap">
+<header class="hero" style="padding:140px 0 30px;">
+  <div class="wrap" style="grid-template-columns:1fr;">
     <div class="hero-copy">
-      <p style="margin-bottom: 1rem;">
-        <a href="blog.html" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent);">&larr; Back to all posts</a>
-      </p>
+      <a href="blog.html" style="font-weight:700;text-decoration:underline;text-underline-offset:3px;font-size:14px;">&larr; Back to all posts</a>
     </div>
   </div>
 </header>
 
-<section style="padding-top: 1.5rem;">
-  <div class="wrap" style="max-width: 760px;">
+<section style="padding-top:0;">
+  <div class="wrap" style="max-width:760px;">
     <div id="post-root">
-      <p class="empty-state">Loading post...</p>
+      <p class="loading-state">Loading post&hellip;</p>
     </div>
   </div>
 </section>
@@ -65,18 +56,12 @@
 <footer class="site-footer">
   <div class="wrap">
     <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="index.html" class="brand">
-          <svg width="24" height="24" viewBox="0 0 48 48" fill="none">
-            <path d="M24 4 L42 11 V22 C42 33 34.5 41 24 44 C13.5 41 6 33 6 22 V11 Z" fill="#2d9e42" stroke="#e8f5e9" stroke-width="2.5" stroke-linejoin="round"/>
-            <path d="M16 24 L21.5 29.5 L33 17" stroke="#0a0f0d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          </svg>
-          Node
-        </a>
-        <p>Barshan Dey's cybersecurity learning journal — built in public, updated regularly.</p>
+      <div>
+        <h3>Node</h3>
+        <p>Barshan Dey's cybersecurity learning journal — network security, ethical hacking, and staying safe online.</p>
       </div>
       <div>
-        <h4 class="footer-heading">Site</h4>
+        <h3>Site</h3>
         <ul class="footer-links">
           <li><a href="index.html">Home</a></li>
           <li><a href="blog.html">Blog</a></li>
@@ -85,7 +70,7 @@
         </ul>
       </div>
       <div>
-        <h4 class="footer-heading">Elsewhere</h4>
+        <h3>Elsewhere</h3>
         <ul class="footer-links">
           <li><a href="https://github.com/itzbarshandey-sudo" target="_blank" rel="noopener noreferrer">GitHub</a></li>
           <li><a href="https://www.youtube.com/@itsmeNode" target="_blank" rel="noopener noreferrer">YouTube</a></li>
@@ -94,12 +79,10 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>&copy; 2026 Barshan Dey</span>
-      <span>Built as a personal project</span>
+      <span>&copy; 2026 Barshan Dey. Built as a personal project.</span>
     </div>
   </div>
 </footer>
-</main>
 
 <script src="script.js"></script>
 <script src="post.js"></script>

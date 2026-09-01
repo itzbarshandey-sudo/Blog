@@ -1,77 +1,8 @@
-/* script.js — Node v4.0: Enhanced UI, micro-interactions, page transitions */
+/* script.js — Node v3.0 */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // 1. Page Load Curtain (auto-removes itself via CSS animation)
-  const curtain = document.createElement('div');
-  curtain.className = 'page-curtain';
-  document.body.prepend(curtain);
-  setTimeout(() => curtain.remove(), 1400);
-
-  // 2. Scroll Progress Bar
-  const progressBar = document.createElement('div');
-  progressBar.className = 'scroll-progress';
-  document.body.prepend(progressBar);
-
-  // 3. Custom Cursor (desktop only)
-  const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches
-    && window.innerWidth > 1024;
-
-  if (isFinePointer) {
-    const dot = document.createElement('div');
-    dot.className = 'cursor-dot';
-    const ring = document.createElement('div');
-    ring.className = 'cursor-ring';
-    document.body.append(dot, ring);
-
-    let cursorX = 0, cursorY = 0;
-    let ringX = 0, ringY = 0;
-
-    document.addEventListener('mousemove', (e) => {
-      cursorX = e.clientX; cursorY = e.clientY;
-      dot.style.left = cursorX + 'px';
-      dot.style.top = cursorY + 'px';
-    }, { passive: true });
-
-    function animateRing() {
-      ringX += (cursorX - ringX) * 0.15;
-      ringY += (cursorY - ringY) * 0.15;
-      ring.style.left = ringX + 'px';
-      ring.style.top = ringY + 'px';
-      requestAnimationFrame(animateRing);
-    }
-    animateRing();
-
-    // Cursor interactions on hoverable elements
-    const hoverables = document.querySelectorAll('a, button, .card, .post-card, .skill-card, .filter-pill, .field input, .field select, .field textarea');
-    hoverables.forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        dot.classList.add('is-hover');
-        ring.classList.add('is-hover');
-      });
-      el.addEventListener('mouseleave', () => {
-        dot.classList.remove('is-hover');
-        ring.classList.remove('is-hover');
-      });
-    });
-  }
-
-  // 4. Hero Particles
-  const hero = document.querySelector('.hero');
-  if (hero) {
-    const particles = document.createElement('div');
-    particles.className = 'hero-particles';
-    for (let i = 0; i < 12; i++) {
-      const p = document.createElement('span');
-      p.style.left = Math.random() * 100 + '%';
-      p.style.animationDelay = Math.random() * 8 + 's';
-      p.style.animationDuration = (6 + Math.random() * 4) + 's';
-      particles.appendChild(p);
-    }
-    hero.appendChild(particles);
-  }
-
-  // 5. Mobile Nav
+  // 1. Mobile nav
   const navToggle = document.querySelector('.nav-toggle');
   const navLinks = document.querySelector('.nav-links');
   if (navToggle && navLinks) {
@@ -89,32 +20,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 6. Nav scroll + progress bar
+  // 2. Nav scroll effect
   const siteNav = document.querySelector('.site-nav');
-  let ticking = false;
-  const updateScroll = () => {
-    ticking = false;
-    const y = window.scrollY;
-    if (siteNav) siteNav.setAttribute('data-scrolled', y > 20);
-    // Progress bar
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = docHeight > 0 ? (y / docHeight) * 100 : 0;
-    progressBar.style.width = progress + '%';
-  };
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(updateScroll);
-      ticking = true;
-    }
-  }, { passive: true });
+  if (siteNav) {
+    window.addEventListener('scroll', () => {
+      siteNav.setAttribute('data-scrolled', window.scrollY > 20);
+    }, { passive: true });
+  }
 
-  // 7. Scroll Reveal + Stagger
-  const revealEls = document.querySelectorAll('.card, .post-card, .skill-card, .section-header, .cta-block, .stat-strip > div, .contact-info .card, .resume-side .card, .resume-block');
+  // 3. Scroll reveal — fade up + blur out
+  const revealEls = document.querySelectorAll('.card, .post-card, .skill-card, .section-header, .cta-block, .stat-strip > div');
   revealEls.forEach(el => el.classList.add('reveal'));
-
-  // Mark grids as stagger targets
-  document.querySelectorAll('.post-grid, .skills-grid, .grid-2, .grid-3, .contact-info, .resume-side')
-    .forEach(el => el.classList.add('stagger'));
 
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -126,62 +42,46 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
   revealEls.forEach(el => revealObserver.observe(el));
-  document.querySelectorAll('.stagger').forEach(el => revealObserver.observe(el));
 
-  // 8. Tagline word-by-word activation
+  // 4. Tagline reveal — word by word activation on scroll (B11)
   const taglineText = document.getElementById('tagline-text');
   if (taglineText) {
     const words = Array.from(taglineText.querySelectorAll('.tw'));
-    words.forEach(w => w.setAttribute('data-text', w.textContent));
+    const trigger = 0.6; // % of viewport at which a word activates
 
     let rafId = null;
-    const triggerY = window.innerHeight * 0.6;
-
     const updateWords = () => {
       rafId = null;
+      const triggerY = window.innerHeight * trigger;
       words.forEach((word) => {
         const rect = word.getBoundingClientRect();
-        if (rect.top < triggerY) word.classList.add('is-active');
+        if (rect.top < triggerY) {
+          word.classList.add('is-active');
+        }
       });
     };
 
-    window.addEventListener('scroll', () => {
+    const onScroll = () => {
       if (rafId === null) rafId = requestAnimationFrame(updateWords);
-    }, { passive: true });
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
     updateWords();
   }
 
-  // 9. Card 3D Tilt + Cursor Glow
-  document.querySelectorAll('.post-card, .card, .skill-card, .cta-block').forEach(card => {
+  // 5. Card hover glow tracking
+  document.querySelectorAll('.post-card, .card, .skill-card').forEach(card => {
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
       const y = ((e.clientY - rect.top) / rect.height * 100).toFixed(1);
       card.style.setProperty('--mx', `${x}%`);
       card.style.setProperty('--my', `${y}%`);
-
-      // 3D tilt (subtle)
-      const tiltX = (y - 50) / -25;
-      const tiltY = (x - 50) / 25;
-      card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-4px)`;
-    });
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = '';
     });
   });
 
-  // 10. Form Field Float Labels
-  document.querySelectorAll('.field input, .field textarea').forEach(input => {
-    if (input.placeholder) input.setAttribute('data-placeholder', input.placeholder);
-    input.setAttribute('placeholder', ' ');
-  });
-  document.querySelectorAll('.field').forEach(field => {
-    if (field.querySelector('input[placeholder=" "], textarea[placeholder=" "], select')) {
-      field.classList.add('float-label');
-    }
-  });
-
-  // 11. Contact Form Validation + Success Animation
+  // 6. Contact form validation
   const contactForm = document.getElementById('contact-form');
   const formCard = document.querySelector('.form-card');
   if (contactForm && formCard) {
@@ -205,13 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
         message.closest('.field').classList.add('error'); isValid = false;
       }
 
-      if (isValid) {
-        // Trigger success animation
-        formCard.classList.add('success-mode');
-        // Add a brief glow pulse
-        formCard.style.boxShadow = '0 0 40px rgba(45, 158, 66, 0.3)';
-        setTimeout(() => { formCard.style.boxShadow = ''; }, 800);
-      }
+      if (isValid) formCard.classList.add('success-mode');
     });
 
     contactForm.querySelectorAll('input, textarea').forEach(input => {
@@ -219,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 12. Dynamic data loaders (posts, stats, profile)
+  // 7. Dynamic data loaders (posts, stats, profile)
   const statStrip = document.getElementById('stat-strip');
   if (statStrip) {
     fetch('data/profile.json')
@@ -243,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(posts => {
         if (Array.isArray(posts) && posts.length > 0) {
           homePostGrid.innerHTML = posts.slice(0, 3).map((p, i) => `
-            <a href="post.html?post=${p.slug}" class="post-card reveal is-active" style="transition-delay:${i * 0.08}s">
+            <a href="post.html?post=${p.slug}" class="post-card reveal is-active" style="animation-delay:${i * 0.08}s">
               <span class="pill-tag tag-${p.category || 'network'}">${p.categoryLabel || 'Note'}</span>
               <h3>${p.title}</h3>
               <p>${p.excerpt}</p>
@@ -255,9 +149,10 @@ document.addEventListener('DOMContentLoaded', () => {
       .catch(() => {});
   }
 
-  // Resume page loaders
+  // Resume page dynamic loaders (kept for compatibility)
   const resumeTargets = ['resume-skills-list', 'resume-certs', 'resume-timeline', 'resume-projects', 'resume-education'];
-  if (resumeTargets.some(id => document.getElementById(id))) {
+  const hasResume = resumeTargets.some(id => document.getElementById(id));
+  if (hasResume) {
     fetch('data/profile.json')
       .then(r => r.ok ? r.json() : null)
       .then(profile => {
@@ -308,26 +203,5 @@ document.addEventListener('DOMContentLoaded', () => {
       })
       .catch(() => {});
   }
-
-  // 13. Add arrows to ghost buttons
-  document.querySelectorAll('.btn-ghost').forEach(btn => {
-    if (!btn.querySelector('.arrow')) {
-      const arrow = document.createElement('span');
-      arrow.className = 'arrow';
-      arrow.textContent = ' →';
-      btn.appendChild(arrow);
-    }
-  });
-
-  // 14. Smooth scroll for hash links
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', (e) => {
-      const target = document.querySelector(link.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-  });
 
 });
