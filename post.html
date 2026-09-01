@@ -37,15 +37,15 @@
   </div>
 </nav>
 
-<header class="hero" style="padding:140px 0 30px;">
-  <div class="wrap" style="grid-template-columns:1fr;">
+<header class="hero hero-page" style="padding-bottom: 30px;">
+  <div class="wrap" style="grid-template-columns: 1fr;">
     <div class="hero-copy">
-      <a href="blog.html" style="font-weight:700;text-decoration:underline;text-underline-offset:3px;font-size:14px;">&larr; Back to all posts</a>
+      <a href="blog.html" class="link-row">&larr; Back to all posts</a>
     </div>
   </div>
 </header>
 
-<section style="padding-top: 1.5rem;">
+<section class="resume-section" style="padding-top: 1.5rem;">
   <div class="wrap" style="max-width: 760px;">
     <div id="post-root">
       <p class="empty-state">Loading post...</p>
@@ -56,12 +56,18 @@
 <footer class="site-footer">
   <div class="wrap">
     <div class="footer-grid">
-      <div>
-        <h3>Node</h3>
-        <p>Barshan Dey's cybersecurity learning journal — network security, ethical hacking, and staying safe online.</p>
+      <div class="footer-brand">
+        <a href="index.html" class="brand">
+          <svg width="24" height="24" viewBox="0 0 48 48" fill="none">
+            <path d="M24 4 L42 11 V22 C42 33 34.5 41 24 44 C13.5 41 6 33 6 22 V11 Z" fill="#2d9e42" stroke="#e8f5e9" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M16 24 L21.5 29.5 L33 17" stroke="#0a0f0d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+          Node
+        </a>
+        <p>Barshan Dey's cybersecurity learning journal — built in public, updated regularly.</p>
       </div>
       <div>
-        <h3>Site</h3>
+        <h4 class="footer-heading">Site</h4>
         <ul class="footer-links">
           <li><a href="index.html">Home</a></li>
           <li><a href="blog.html">Blog</a></li>
@@ -70,7 +76,7 @@
         </ul>
       </div>
       <div>
-        <h3>Elsewhere</h3>
+        <h4 class="footer-heading">Elsewhere</h4>
         <ul class="footer-links">
           <li><a href="https://github.com/itzbarshandey-sudo" target="_blank" rel="noopener noreferrer">GitHub</a></li>
           <li><a href="https://www.youtube.com/@itsmeNode" target="_blank" rel="noopener noreferrer">YouTube</a></li>
@@ -79,7 +85,8 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>&copy; 2026 Barshan Dey. Built as a personal project.</span>
+      <span>&copy; 2026 Barshan Dey</span>
+      <span>Built as a personal project</span>
     </div>
   </div>
 </footer>
