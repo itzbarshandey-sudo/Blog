@@ -15,11 +15,27 @@
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="style.css"></noscript>
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"></noscript>
+<!-- Blocking stylesheet prevents FOUC. JS-based preload was the cause of the glitch. -->
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap">
 <link rel="icon" href="assets/favicon-32.png" type="image/png" />
+<style>
+  /* Critical inline CSS — paints before style.css loads, prevents FOUC */
+  html { background: #0a0f0d; color-scheme: dark; }
+  body { margin: 0; font-family: system-ui, -apple-system, sans-serif; }
+  *, *::before, *::after { box-sizing: border-box; }
+  /* Hide body until stylesheet loads — only 1 frame of invisible, then everything renders */
+  body { visibility: hidden; }
+  body.ready { visibility: visible; }
+</style>
+<script>
+  // Mark body ready on next frame after CSS loads (FOUC prevention)
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
+      document.body.classList.add('ready');
+    });
+  });
+</script>
 </head>
 <body>
 
@@ -227,6 +243,27 @@
 
 </main>
 
+<script>
+  // Page transition: fade out before navigation, fade in on next page
+  (function() {
+    // Modern browsers: View Transitions API (native, smooth)
+    if (document.startViewTransition) {
+      document.documentElement.style.viewTransitionName = 'page';
+    }
+    // Intercept navigation for smooth cross-page fade
+    document.addEventListener('click', function(e) {
+      var link = e.target.closest('a[href]');
+      if (!link) return;
+      var href = link.getAttribute('href');
+      // Skip external, hash, mailto, target=_blank, modified clicks
+      if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('http') ||
+          link.target === '_blank' || e.ctrlKey || e.metaKey || e.shiftKey) return;
+      e.preventDefault();
+      document.body.classList.add('page-leaving');
+      setTimeout(function() { window.location.href = href; }, 180);
+    });
+  })();
+</script>
 <script src="script.js"></script>
 </body>
 </html>

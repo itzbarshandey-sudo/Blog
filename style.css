@@ -45,6 +45,19 @@ body {
   overflow-x: hidden;
   min-height: 100vh;
   font-size: 16px;
+  /* Page entry transition — fade in after CSS loads (prevents visible flash) */
+  animation: page-enter 0.3s var(--ease-out) both;
+}
+
+@keyframes page-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Page leaving transition — fade out before navigation */
+body.page-leaving { animation: page-leave 0.18s var(--ease-out) forwards; }
+@keyframes page-leave {
+  to { opacity: 0; transform: translateY(-4px); }
 }
 
 h1, h2, h3, h4 { font-weight: 700; line-height: 1.15; color: var(--fg); letter-spacing: -0.02em; }
