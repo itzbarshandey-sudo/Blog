@@ -1,42 +1,26 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Node — Barshan Dey's Cybersecurity Journal</title>
-<meta name="description" content="Node is Barshan Dey's personal site — cybersecurity learning notes, blog write-ups, and a resume, built while working toward a career in security." />
-<link rel="canonical" href="https://node.barshandey.dev/" />
+<title>Node â€” Barshan Dey's Cybersecurity Journal</title>
+<meta name="description" content="Node is Barshan Dey's personal site â€” cybersecurity learning notes, blog write-ups, and a resume, built while working toward a career in security." />
+<link rel="canonical" href="https://itsnode.in/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Node" />
-<meta property="og:title" content="Node — Barshan Dey's Cybersecurity Journal" />
+<meta property="og:title" content="Node â€” Barshan Dey's Cybersecurity Journal" />
 <meta property="og:description" content="Cybersecurity learning notes, blog write-ups, and a resume, built while working toward a career in security." />
-<meta property="og:url" content="https://node.barshandey.dev/" />
+<meta property="og:url" content="https://itsnode.in/" />
 <meta property="og:image" content="/assets/og-image.png" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Node — Barshan Dey's Cybersecurity Journal" />
+<meta name="twitter:title" content="Node â€” Barshan Dey's Cybersecurity Journal" />
 <meta name="twitter:description" content="Cybersecurity learning notes, blog write-ups, and a resume, built while working toward a career in security." />
 <meta name="twitter:image" content="/assets/og-image.png" />
-<style>
-/* Critical CSS - Inline to prevent CLS and break dependency chain */
-@font-face{font-family:'Inter Fallback';src:local('Arial');font-display:swap;ascent-override:90%;descent-override:22%;line-gap-override:0%;size-adjust:107%}
-@font-face{font-family:'Baloo 2 Fallback';src:local('Arial');font-display:swap;ascent-override:95%;descent-override:25%;line-gap-override:0%;size-adjust:112%}
-:root{--paper:#ffffff;--ink:#0f172a;--primary:#2d9e42;--font-sans:'Inter','Inter Fallback',system-ui,sans-serif;--font-display:'Baloo 2','Baloo 2 Fallback',system-ui,sans-serif}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:var(--font-sans);background:var(--paper);color:var(--ink);line-height:1.6}
-h1,h2,h3,h4,h5,h6{font-family:var(--font-display);color:var(--ink)}
-.hero-art{min-height:480px;contain:layout style paint}
-.hero-sub{min-height:5em;contain:layout style}
-section{contain:layout style}
-</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="dns-prefetch" href="https://fonts.googleapis.com">
-<link rel="dns-prefetch" href="https://fonts.gstatic.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="style.css"></noscript>
-<!-- Defer font loading with media query to break dependency chain -->
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" as="style" media="print" onload="this.media='all';this.onload=null">
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap"></noscript>
 </head>
 <body>
@@ -45,7 +29,7 @@ section{contain:layout style}
   <div class="wrap">
     <a href="index.html" class="brand">
       <svg class="badge-mark" viewBox="0 0 48 48" fill="none">
-        <path d="M24 4 L42 11 V22 C42 33 34.5 41 24 44 C13.5 41 6 33 6 22 V11 Z" fill="#3fc45b" stroke="#14181a" stroke-width="2.5" stroke-linejoin="round"/>
+        <path d="M24 4 L42 11 V22 C42 33 34.5 41 24 44 C13.5 41 6 33 6 22 V11 Z" fill="#2d9e42" stroke="#14181a" stroke-width="2.5" stroke-linejoin="round"/>
         <path d="M16 24 L21.5 29.5 L33 17" stroke="#14181a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
       </svg>
       Node
@@ -62,11 +46,12 @@ section{contain:layout style}
   </div>
 </nav>
 
+<main>
 <header class="hero">
   <div class="wrap">
     <div class="hero-copy">
       <span class="eyebrow"><span class="dot"></span> Currently: learning in public</span>
-      <h1>Hey, I'm Barshan.<br>This is <span class="pop">Node</span> —<br>my <span class="stroke">security</span> journal.</h1>
+      <h1>Hey, I'm Barshan.<br>This is <span class=”pop”>Node</span> -”<br>my <span class=”stroke”>security</span> journal.</h1>
       <p class="hero-sub">I'm learning cybersecurity from the ground up: networks, ethical hacking, and the everyday habits that keep people safe online. Node is where I write it down, track what I've built, and keep my resume up to date as I go.</p>
       <div class="hero-actions">
         <a href="blog.html" class="btn btn-primary">Read the blog</a>
@@ -75,7 +60,7 @@ section{contain:layout style}
       </div>
     </div>
     <div class="hero-art" aria-hidden="true">
-      <img class="hero-mascot" src="assets/mascot.webp" alt="" width="380" loading="eager" fetchpriority="high">
+      <img src="assets/mascot.webp" alt="Mascot" class="hero-mascot" fetchpriority="high" width="380" height="396" />
       <div class="sticker s1">
         <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="10" width="14" height="10" rx="2" fill="#dcfbe0" stroke="#14181a" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="#14181a" stroke-width="2" fill="none"/></svg>
         Passwords locked
@@ -85,7 +70,7 @@ section{contain:layout style}
         Bug hunting
       </div>
       <div class="sticker s3">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M12 3 20 6.5v5c0 5-3.4 8.6-8 9.5-4.6-.9-8-4.5-8-9.5v-5L12 3Z" fill="#3fc45b" stroke="#14181a" stroke-width="2" stroke-linejoin="round"/><path d="M8.5 12 11 14.5 15.5 9.5" stroke="#14181a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 3 20 6.5v5c0 5-3.4 8.6-8 9.5-4.6-.9-8-4.5-8-9.5v-5L12 3Z" fill="#2d9e42" stroke="#14181a" stroke-width="2" stroke-linejoin="round"/><path d="M8.5 12 11 14.5 15.5 9.5" stroke="#14181a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
         Threat modeling
       </div>
       <div class="sticker s4">
@@ -104,13 +89,13 @@ section{contain:layout style}
   </div>
 </header>
 
-<main>
 <section id="about">
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow"><span class="dot"></span> What I'm into</span>
       <h2>Security is a lot of small habits, done well</h2>
-      <p>I got into this field because I liked taking things apart to see how they break. These days I split my time between the offensive side (finding the holes) and the defensive side (patching them before someone else finds them first).</p>
+      <p style="font-style: italic; margin-bottom: 0.75rem;">"Jack of all trades, master of none, but often times better than a master of one."</p>
+      <p>I am a student who likes to share my experience in my learning.</p>
     </div>
     <div class="grid-3">
       <div class="card">
@@ -140,21 +125,21 @@ section{contain:layout style}
 
 <section class="band-dark">
   <div class="wrap">
-    <div class="stat-strip">
+    <div class="stat-strip" id="stat-strip">
       <div>
-        <div class="num">40+</div>
+        <div class="num">0+</div>
         <div class="label">CTF challenges solved</div>
       </div>
       <div>
-        <div class="num">18</div>
+        <div class="num">0</div>
         <div class="label">Blog posts written</div>
       </div>
       <div>
-        <div class="num">6</div>
+        <div class="num">0</div>
         <div class="label">Home labs built &amp; broken</div>
       </div>
       <div>
-        <div class="num">1</div>
+        <div class="num">0</div>
         <div class="label">OSCP attempt (in progress)</div>
       </div>
     </div>
@@ -166,24 +151,10 @@ section{contain:layout style}
     <div class="section-head">
       <span class="eyebrow"><span class="dot"></span> From the blog</span>
       <h2>Recent notes &amp; write-ups</h2>
-      <p>Short, practical posts — mostly things I wish someone had explained to me plainly the first time.</p>
+      <p>Short, practical posts â€” notes, write-ups, and lessons learned.</p>
     </div>
-    <div class="grid-3">
-      <a href="post.html?post=phishing-tells" class="card" style="text-decoration:none;color:inherit;">
-        <span class="pill-tag tag-awareness" style="margin-bottom:14px;">Awareness</span>
-        <h3>5 tells that give phishing emails away</h3>
-        <p>The little inconsistencies attackers almost always slip up on.</p>
-      </a>
-      <a href="post.html?post=home-network" class="card" style="text-decoration:none;color:inherit;">
-        <span class="pill-tag tag-network" style="margin-bottom:14px;">Network</span>
-        <h3>Locking down a home network in a weekend</h3>
-        <p>A checklist for router settings, guest networks, and firmware updates.</p>
-      </a>
-      <a href="post.html?post=first-ctf" class="card" style="text-decoration:none;color:inherit;">
-        <span class="pill-tag tag-web" style="margin-bottom:14px;">Write-up</span>
-        <h3>What my first CTF taught me about patience</h3>
-        <p>Spoiler: it wasn't a tooling problem, it was a mindset problem.</p>
-      </a>
+    <div class="grid-3" id="home-post-grid">
+      <p class="loading-state" style="grid-column:1/-1; text-align:center; color:var(--ink-light);">No posts published yet â€” check back soon or publish your first write-up in <code>posts/</code>!</p>
     </div>
     <div style="margin-top:32px;">
       <a href="blog.html" class="btn btn-dark">See all posts</a>
@@ -197,23 +168,22 @@ section{contain:layout style}
       <div style="background:var(--paper);border:2px solid var(--ink);border-radius:var(--radius-lg);padding:44px;box-shadow:var(--stick-shadow);display:flex;flex-direction:column;gap:14px;align-items:flex-start;">
         <span class="eyebrow"><span class="dot"></span> Get in touch</span>
         <h2 style="font-size:30px;max-width:20ch;">Found something worth reporting, or just want to talk security?</h2>
-        <p style="max-width:48ch;">Whether it's a responsible disclosure, a collab idea, or a "hey, is this email a phishing attempt" — I read everything.</p>
+        <p style="max-width:48ch;">Whether it's a responsible disclosure, a collab idea, or a "hey, is this email a phishing attempt" â€” I read everything.</p>
         <a href="contact.html" class="btn btn-primary">Contact me</a>
       </div>
     </div>
   </div>
 </section>
-</main>
 
 <footer class="site-footer">
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <h2 style="font-size:1.125rem;margin-bottom:1rem;">Node</h2>
-        <p>Barshan Dey's cybersecurity learning journal — network security, ethical hacking, and staying safe online.</p>
+        <h3>Node</h3>
+        <p>Barshan Dey's cybersecurity learning journal â€” network security, ethical hacking, and staying safe online.</p>
       </div>
       <div>
-        <h2 style="font-size:1.125rem;margin-bottom:1rem;">Site</h2>
+        <h3>Site</h3>
         <ul class="footer-links">
           <li><a href="index.html">Home</a></li>
           <li><a href="blog.html">Blog</a></li>
@@ -222,21 +192,22 @@ section{contain:layout style}
         </ul>
       </div>
       <div>
-        <h2 style="font-size:1.125rem;margin-bottom:1rem;">Elsewhere</h2>
+        <h3>Elsewhere</h3>
         <ul class="footer-links">
-          <li><a href="#">GitHub</a></li>
-          <li><a href="#">LinkedIn</a></li>
-          <li><a href="#">Mastodon</a></li>
+          <li><a href="https://github.com/itzbarshandey-sudo" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="https://www.youtube.com/@itsmeNode" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+          <li><a href="mailto:itzbarshandey@gmail.com">Email</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <span>&copy; 2026 Barshan Dey. Built as a personal project, not a product.</span>
-      <span>Node — base template, ready to customize.</span>
+      <span>Node â€” base template, ready to customize.</span>
     </div>
   </div>
 </footer>
+</main>
 
-<script defer src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

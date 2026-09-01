@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -9,8 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="style.css"></noscript>
-<!-- Defer font loading with media query to break dependency chain -->
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" as="style" media="print" onload="this.media='all';this.onload=null">
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap"></noscript>
 <!-- Markdown renderer, loaded from CDN so no build step is required -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js" defer></script>
@@ -21,7 +20,7 @@
   <div class="wrap">
     <a href="index.html" class="brand">
       <svg class="badge-mark" viewBox="0 0 48 48" fill="none">
-        <path d="M24 4 L42 11 V22 C42 33 34.5 41 24 44 C13.5 41 6 33 6 22 V11 Z" fill="#3fc45b" stroke="#14181a" stroke-width="2.5" stroke-linejoin="round"/>
+        <path d="M24 4 L42 11 V22 C42 33 34.5 41 24 44 C13.5 41 6 33 6 22 V11 Z" fill="#2d9e42" stroke="#14181a" stroke-width="2.5" stroke-linejoin="round"/>
         <path d="M16 24 L21.5 29.5 L33 17" stroke="#14181a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
       </svg>
       Node
@@ -38,7 +37,7 @@
   </div>
 </nav>
 
-<header class="hero" style="padding:50px 0 40px;">
+<header class="hero" style="padding:140px 0 30px;">
   <div class="wrap" style="grid-template-columns:1fr;">
     <div class="hero-copy">
       <a href="blog.html" style="font-weight:700;text-decoration:underline;text-underline-offset:3px;font-size:14px;">&larr; Back to all posts</a>
@@ -58,11 +57,11 @@
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <h4>Node</h4>
+        <h3>Node</h3>
         <p>Barshan Dey's cybersecurity learning journal — network security, ethical hacking, and staying safe online.</p>
       </div>
       <div>
-        <h4>Site</h4>
+        <h3>Site</h3>
         <ul class="footer-links">
           <li><a href="index.html">Home</a></li>
           <li><a href="blog.html">Blog</a></li>
@@ -71,11 +70,11 @@
         </ul>
       </div>
       <div>
-        <h4>Elsewhere</h4>
+        <h3>Elsewhere</h3>
         <ul class="footer-links">
-          <li><a href="#">GitHub</a></li>
-          <li><a href="#">LinkedIn</a></li>
-          <li><a href="#">Mastodon</a></li>
+          <li><a href="https://github.com/itzbarshandey-sudo" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="https://www.youtube.com/@itsmeNode" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+          <li><a href="mailto:itzbarshandey@gmail.com">Email</a></li>
         </ul>
       </div>
     </div>
@@ -86,7 +85,7 @@
   </div>
 </footer>
 
-<script defer src="script.js"></script>
-<script defer src="post.js"></script>
+<script src="script.js"></script>
+<script src="post.js"></script>
 </body>
 </html>
