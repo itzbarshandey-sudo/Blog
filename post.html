@@ -6,8 +6,9 @@
 <title id="page-title">Post — Node</title>
 <meta id="page-description" name="description" content="A blog post from Node, Barshan Dey's cybersecurity learning journal." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="style.css"></noscript>
 <!-- Markdown renderer, loaded from CDN so no build step is required -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js" defer></script>
 </head>
@@ -82,7 +83,7 @@
   </div>
 </footer>
 
-<script src="script.js"></script>
-<script src="post.js"></script>
+<script defer src="script.js"></script>
+<script defer src="post.js"></script>
 </body>
 </html>
