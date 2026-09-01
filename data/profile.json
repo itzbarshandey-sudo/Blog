@@ -4,21 +4,23 @@
   "githubUser": "itzbarshandey-sudo (Oops2Ops)",
   "youtube": "https://www.youtube.com/@itsmeNode",
   "stats": [
-    { "num": "0+", "label": "CTF challenges solved" },
-    { "num": "0", "label": "Blog posts written" },
-    { "num": "0", "label": "Home labs built & broken" },
-    { "num": "0", "label": "OSCP attempt (in progress)" }
+    { "num": "1", "label": "Blog post published" },
+    { "num": "Active", "label": "Learning mode" },
+    { "num": "Building", "label": "Home lab" },
+    { "num": "Next", "label": "OSCP in pipeline" }
   ],
   "skills": [
     "Python",
-    "Linux"
+    "Linux",
+    "Network Basics",
+    "Security Fundamentals"
   ],
   "certifications": [],
   "learningPath": [],
   "education": {
     "institution": "Narayana",
     "status": "Student",
-    "details": "School student at Narayana, independently learning Python, Linux, and cybersecurity fundamentals."
+    "details": "Building strong foundations in computer science, Python programming, and Linux systems."
   },
   "projects": [
     {

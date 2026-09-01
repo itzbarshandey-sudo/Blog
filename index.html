@@ -47,16 +47,16 @@
 </nav>
 
 <main>
-<header class="hero">
-  <div class="wrap">
-    <div class="hero-copy">
-      <span class="eyebrow"><span class="dot"></span> Currently: learning in public</span>
-      <h1>Hey, I'm Barshan.<br>This is <span class=”pop”>Node</span> -”<br>my <span class=”stroke”>security</span> journal.</h1>
-      <p class="hero-sub">I'm learning cybersecurity from the ground up: networks, ethical hacking, and the everyday habits that keep people safe online. Node is where I write it down, track what I've built, and keep my resume up to date as I go.</p>
-      <div class="hero-actions">
-        <a href="blog.html" class="btn btn-primary">Read the blog</a>
-        <a href="resume.html" class="btn btn-dark">View resume</a>
-        <a href="contact.html" class="btn btn-ghost">Say hi</a>
+<header class=”hero”>
+  <div class=”wrap”>
+    <div class=”hero-copy”>
+      <span class=”eyebrow”><span class=”dot”></span> $ whoami --role security_researcher</span>
+      <h1>Hey, I'm Barshan.<br>This is <span class=”pop”>Node</span> —<br>my <span class=”stroke”>security</span> journal.</h1>
+      <p class=”hero-sub”>Learning cybersecurity from the ground up: networks, ethical hacking, and everyday defense. Node is where I document the journey, share write-ups, and track progress toward a career in security.</p>
+      <div class=”hero-actions”>
+        <a href=”blog.html” class=”btn btn-primary”>Read the blog</a>
+        <a href=”resume.html” class=”btn btn-dark”>View resume</a>
+        <a href=”contact.html” class=”btn btn-ghost”>Say hi</a>
       </div>
     </div>
     <div class="hero-art" aria-hidden="true">
@@ -92,32 +92,40 @@
 <section id="about">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow"><span class="dot"></span> What I'm into</span>
-      <h2>Security is a lot of small habits, done well</h2>
-      <p style="font-style: italic; margin-bottom: 0.75rem;">"Jack of all trades, master of none, but often times better than a master of one."</p>
-      <p>I am a student who likes to share my experience in my learning.</p>
+      <span class="eyebrow"><span class="dot"></span> Focus areas</span>
+      <h2>Defense in depth, one layer at a time</h2>
+      <p style="font-style: italic; margin-bottom: 0.75rem; color: var(--fg-muted);">"Jack of all trades, master of none, but often times better than a master of one."</p>
     </div>
     <div class="grid-3">
       <div class="card">
         <div class="icon-badge">
-          <svg viewBox="0 0 24 24" fill="none"><path d="M4 9c4-3 12-3 16 0M6 13c3.2-2 8.8-2 12 0M9 17c1.6-1 3.4-1 5 0" stroke="#14181a" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7" r="1.4" fill="#14181a"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="M9 12l2 2 4-4"/>
+          </svg>
         </div>
         <h3>Network security</h3>
-        <p>Firewalls, segmentation, and figuring out why "just open the port" is never the right answer.</p>
+        <p>Firewalls, segmentation, and understanding why "just open the port" is rarely the right answer.</p>
       </div>
       <div class="card">
-        <div class="icon-badge" style="background:#ffe1d6;">
-          <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="7" fill="none" stroke="#14181a" stroke-width="2"/><path d="M9 9h.01M15 9h.01M8 15c1.2 1 2.6 1 4 0" stroke="#14181a" stroke-width="1.6" stroke-linecap="round"/><path d="M5 12H3M21 12h-2M12 5V3M12 21v-2" stroke="#14181a" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <div class="icon-badge" style="background: rgba(255, 180, 84, 0.1); border-color: rgba(255, 180, 84, 0.3);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#ffb454" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 16v-4M12 8h.01"/>
+          </svg>
         </div>
         <h3>Ethical hacking</h3>
-        <p>CTFs on weekends, lab boxes on weeknights. Learning to think like an attacker so I can defend like one.</p>
+        <p>CTFs on weekends, lab environments during the week. Learning to think like an attacker.</p>
       </div>
       <div class="card">
-        <div class="icon-badge" style="background:#fff6cf;">
-          <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="10" width="14" height="10" rx="2" fill="none" stroke="#14181a" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="#14181a" stroke-width="2" fill="none"/></svg>
+        <div class="icon-badge" style="background: rgba(77, 171, 247, 0.1); border-color: rgba(77, 171, 247, 0.3);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#4dabf7" stroke-width="2" stroke-linecap="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
         </div>
         <h3>Everyday privacy</h3>
-        <p>Password managers, MFA, and helping non-technical friends and family lock down their accounts.</p>
+        <p>Password managers, MFA enforcement, and helping friends lock down their digital lives.</p>
       </div>
     </div>
   </div>
@@ -127,20 +135,20 @@
   <div class="wrap">
     <div class="stat-strip" id="stat-strip">
       <div>
-        <div class="num">0+</div>
+        <div class="num">—</div>
         <div class="label">CTF challenges solved</div>
       </div>
       <div>
-        <div class="num">0</div>
+        <div class="num">1</div>
         <div class="label">Blog posts written</div>
       </div>
       <div>
-        <div class="num">0</div>
-        <div class="label">Home labs built &amp; broken</div>
+        <div class="num">—</div>
+        <div class="label">Home labs built</div>
       </div>
       <div>
-        <div class="num">0</div>
-        <div class="label">OSCP attempt (in progress)</div>
+        <div class="num">Active</div>
+        <div class="label">Learning path</div>
       </div>
     </div>
   </div>
@@ -201,8 +209,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>&copy; 2026 Barshan Dey. Built as a personal project, not a product.</span>
-      <span>Node â€” base template, ready to customize.</span>
+      <span>&copy; 2026 Barshan Dey. Built as a personal project.</span>
     </div>
   </div>
 </footer>
