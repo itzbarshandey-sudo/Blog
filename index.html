@@ -3,32 +3,30 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Node — Barshan Dey's Cybersecurity Journal</title>
-<meta name="description" content="Node is Barshan Dey's personal site — cybersecurity learning notes, blog write-ups, and a resume, built while working toward a career in security." />
+<title>Node — Barshan Dey | Cybersecurity Portfolio &amp; Blog</title>
+<meta name="description" content="Barshan Dey's cybersecurity portfolio — blog write-ups, security notes, and a growing record of hands-on learning in ethical hacking and network defense." />
 <link rel="canonical" href="https://itsnode.in/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Node" />
-<meta property="og:title" content="Node — Barshan Dey's Cybersecurity Journal" />
-<meta property="og:description" content="Cybersecurity learning notes, blog write-ups, and a resume, built while working toward a career in security." />
+<meta property="og:title" content="Node — Barshan Dey | Cybersecurity Portfolio" />
+<meta property="og:description" content="Cybersecurity portfolio and blog — ethical hacking notes, write-ups, and hands-on learning." />
 <meta property="og:url" content="https://itsnode.in/" />
 <meta property="og:image" content="/assets/og-image.png" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Node — Barshan Dey's Cybersecurity Journal" />
-<meta name="twitter:description" content="Cybersecurity learning notes, blog write-ups, and a resume, built while working toward a career in security." />
-<meta name="twitter:image" content="/assets/og-image.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="style.css"></noscript>
 <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"></noscript>
+<link rel="icon" href="assets/favicon-32.png" type="image/png" />
 </head>
 <body>
 
 <nav class="site-nav">
   <div class="wrap">
     <a href="index.html" class="brand">
-      <svg class="badge-mark" viewBox="0 0 48 48" fill="none">
+      <svg width="28" height="28" viewBox="0 0 48 48" fill="none">
         <path d="M24 4 L42 11 V22 C42 33 34.5 41 24 44 C13.5 41 6 33 6 22 V11 Z" fill="#2d9e42" stroke="#e8f5e9" stroke-width="2.5" stroke-linejoin="round"/>
         <path d="M16 24 L21.5 29.5 L33 17" stroke="#0a0f0d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
       </svg>
@@ -47,189 +45,163 @@
 </nav>
 
 <main>
+
+<!-- ─── Hero ──────────────────────────────────────────────────────────────── -->
 <header class="hero">
   <div class="wrap">
     <div class="hero-copy">
-      <span class="eyebrow">
-        <svg width="8" height="8" viewBox="0 0 8 8" fill="none" style="flex-shrink:0;">
-          <circle cx="4" cy="4" r="4" fill="#2d9e42"/>
-        </svg>
-        learning in public
-      </span>
-      <h1>Hey, I'm Barshan.<br>This is <span class="pop">Node</span> —<br>my <span class="stroke">security</span> journal.</h1>
-      <p class="hero-sub">Learning cybersecurity from the ground up: networks, ethical hacking, and everyday defense. Node is where I document the journey, share write-ups, and track progress toward a career in security.</p>
-      <div class="hero-actions">
+      <p class="hero-eyebrow">
+        <span class="eyebrow-dot"></span>
+        Cybersecurity learning in public
+      </p>
+      <h1 class="hero-headline">I learn security by<br><span class="headline-accent">writing it down</span></h1>
+      <p class="hero-sub">Notes from the lab, write-ups from CTFs, and notes on everyday defense. Everything I learn goes here — in public — so you can see how I think.</p>
+      <div class="hero-cta">
         <a href="blog.html" class="btn btn-primary">Read the blog</a>
-        <a href="resume.html" class="btn btn-secondary">View resume</a>
-        <a href="contact.html" class="btn btn-ghost">Say hi</a>
+        <a href="resume.html" class="btn btn-ghost">View resume</a>
       </div>
+      <p class="hero-proof">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2d9e42" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        1 post published &nbsp;·&nbsp; Actively learning &nbsp;·&nbsp; Kolkata, India
+      </p>
     </div>
     <div class="hero-art" aria-hidden="true">
-      <img src="assets/mascot.webp" alt="Mascot" class="hero-mascot" fetchpriority="high" width="380" height="396" />
-      <div class="sticker s1">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2d9e42" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-        </svg>
-        Passwords locked
-      </div>
-      <div class="sticker s2">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffb454" stroke-width="2" stroke-linecap="round">
-          <circle cx="12" cy="12" r="10"/>
-          <line x1="12" y1="8" x2="12" y2="12"/>
-          <line x1="12" y1="16" x2="12.01" y2="16"/>
-        </svg>
-        Bug hunting
-      </div>
-      <div class="sticker s3">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2d9e42" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-        </svg>
-        Threat modeling
-      </div>
-      <div class="sticker s4">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4dabf7" stroke-width="2" stroke-linecap="round">
-          <circle cx="12" cy="12" r="3"/>
-          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-        </svg>
-        Key rotation
-      </div>
-      <div class="sticker s5">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4dabf7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-        </svg>
-        Watching logs
-      </div>
-      <div class="sticker s6">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffb454" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
-          <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
-          <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
-          <line x1="12" y1="20" x2="12.01" y2="20"/>
-        </svg>
-        Wi-Fi hardened
-      </div>
+      <img src="assets/mascot.webp" alt="" class="hero-mascot" width="380" height="396" />
     </div>
   </div>
 </header>
 
-<section id="about">
+<!-- ─── Tagline Reveal ─────────────────────────────────────────────────── -->
+<section class="tagline-section" aria-label="Tagline">
   <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">
-        <svg width="8" height="8" viewBox="0 0 8 8" fill="none" style="flex-shrink:0;">
-          <circle cx="4" cy="4" r="4" fill="#2d9e42"/>
-        </svg>
-        Focus areas
-      </span>
-      <h2>Defense in depth, one layer at a time</h2>
-      <p style="font-style:italic; margin-bottom:0;">"Jack of all trades, master of none, but often times better than a master of one."</p>
+    <p class="tagline-text" id="tagline-text">
+      <span class="tw">Learning</span>
+      <span class="tw">security</span>
+      <span class="tw">is</span>
+      <span class="tw">a</span>
+      <span class="tw">craft.</span>
+      <br>
+      <span class="tw">I</span>
+      <span class="tw">document</span>
+      <span class="tw">every</span>
+      <span class="tw">step.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ─── Blog Section ────────────────────────────────────────────────────── -->
+<section class="section-blog" id="blog">
+  <div class="wrap">
+    <div class="section-header">
+      <div>
+        <p class="section-label">
+          <span class="label-dot"></span>
+          From the blog
+        </p>
+        <h2 class="section-title">Notes, write-ups,<br>lessons learned.</h2>
+      </div>
+      <a href="blog.html" class="btn btn-ghost btn-sm">All posts →</a>
     </div>
-    <div class="grid-3">
-      <div class="card">
-        <div class="icon-badge">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2d9e42" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+    <div class="post-grid" id="home-post-grid">
+      <p class="empty-state">No posts yet — first write-up coming soon.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Resume / Skills Section ─────────────────────────────────────────── -->
+<section class="section-resume" id="resume">
+  <div class="wrap">
+    <div class="section-header">
+      <div>
+        <p class="section-label">
+          <span class="label-dot"></span>
+          What I'm building
+        </p>
+        <h2 class="section-title">Skills in progress,<br>not just on paper.</h2>
+      </div>
+      <a href="resume.html" class="btn btn-ghost btn-sm">Full resume →</a>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon" style="--skill-color:#2d9e42;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2d9e42" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
             <path d="M9 12l2 2 4-4"/>
           </svg>
         </div>
-        <h3>Network security</h3>
-        <p>Firewalls, segmentation, and understanding why "just open the port" is rarely the right answer.</p>
+        <h3>Network Security</h3>
+        <p>Firewalls, segmentation, port analysis. Understanding why "just open the port" is rarely the right answer.</p>
+        <div class="skill-tags">
+          <span class="pill-tag tag-network">TCP/IP</span>
+          <span class="pill-tag tag-network">Firewalls</span>
+        </div>
       </div>
-      <div class="card">
-        <div class="icon-badge" style="background:rgba(255,180,84,0.1); border-color:rgba(255,180,84,0.3);">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffb454" stroke-width="2" stroke-linecap="round">
+      <div class="skill-card">
+        <div class="skill-icon" style="--skill-color:#ffb454;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffb454" stroke-width="2" stroke-linecap="round">
             <circle cx="12" cy="12" r="10"/>
             <line x1="12" y1="8" x2="12" y2="12"/>
             <line x1="12" y1="16" x2="12.01" y2="16"/>
           </svg>
         </div>
-        <h3>Ethical hacking</h3>
-        <p>CTFs on weekends, lab environments during the week. Learning to think like an attacker.</p>
+        <h3>Ethical Hacking</h3>
+        <p>CTF challenges and lab environments. Learning to think from an attacker's perspective to defend better.</p>
+        <div class="skill-tags">
+          <span class="pill-tag tag-web">CTFs</span>
+          <span class="pill-tag tag-web">Kali Linux</span>
+        </div>
       </div>
-      <div class="card">
-        <div class="icon-badge" style="background:rgba(77,171,247,0.1); border-color:rgba(77,171,247,0.3);">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4dabf7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <div class="skill-card">
+        <div class="skill-icon" style="--skill-color:#4dabf7;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4dabf7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
             <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
           </svg>
         </div>
-        <h3>Everyday privacy</h3>
-        <p>Password managers, MFA enforcement, and helping friends lock down their digital lives.</p>
+        <h3>Python &amp; Automation</h3>
+        <p>Writing scripts to automate security tasks, parse logs, and build small tools. Python first, always.</p>
+        <div class="skill-tags">
+          <span class="pill-tag tag-privacy">Python</span>
+          <span class="pill-tag tag-privacy">Linux CLI</span>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="band-dark">
+<!-- ─── CTA Section ──────────────────────────────────────────────────────── -->
+<section class="section-cta">
   <div class="wrap">
-    <div class="stat-strip" id="stat-strip">
-      <div>
-        <div class="num">—</div>
-        <div class="label">CTF challenges solved</div>
-      </div>
-      <div>
-        <div class="num">1</div>
-        <div class="label">Blog post published</div>
-      </div>
-      <div>
-        <div class="num">—</div>
-        <div class="label">Home labs built</div>
-      </div>
-      <div>
-        <div class="num">Active</div>
-        <div class="label">Learning path</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="band-muted">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">
-        <svg width="8" height="8" viewBox="0 0 8 8" fill="none" style="flex-shrink:0;">
-          <circle cx="4" cy="4" r="4" fill="#2d9e42"/>
-        </svg>
-        From the blog
-      </span>
-      <h2>Recent notes and write-ups</h2>
-      <p>Short, practical posts — notes, write-ups, and lessons learned.</p>
-    </div>
-    <div class="post-grid" id="home-post-grid">
-      <p class="empty-state">No posts published yet — check back soon or publish your first write-up in <code>posts/</code>!</p>
-    </div>
-    <div class="section-cta">
-      <a href="blog.html" class="btn btn-secondary">See all posts</a>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="cta-card">
-      <span class="eyebrow">
-        <svg width="8" height="8" viewBox="0 0 8 8" fill="none" style="flex-shrink:0;">
-          <circle cx="4" cy="4" r="4" fill="#2d9e42"/>
-        </svg>
+    <div class="cta-block">
+      <p class="section-label">
+        <span class="label-dot"></span>
         Get in touch
-      </span>
-      <h2>Found something worth reporting, or just want to talk security?</h2>
-      <p>Whether it's a responsible disclosure, a collab idea, or a "hey, is this email a phishing attempt" — I read everything.</p>
-      <a href="contact.html" class="btn btn-primary">Contact me</a>
+      </p>
+      <h2 class="cta-headline">Working on something interesting,<br>or want to talk security?</h2>
+      <p class="cta-body">Responsible disclosures, collaboration ideas, or just a question about a post — I read everything and reply when I can.</p>
+      <a href="contact.html" class="btn btn-primary">Send a message</a>
     </div>
   </div>
 </section>
 
+<!-- ─── Footer ───────────────────────────────────────────────────────────── -->
 <footer class="site-footer">
   <div class="wrap">
     <div class="footer-grid">
-      <div>
-        <h3>Node</h3>
-        <p>Barshan Dey's cybersecurity learning journal — network security, ethical hacking, and staying safe online.</p>
+      <div class="footer-brand">
+        <a href="index.html" class="brand">
+          <svg width="24" height="24" viewBox="0 0 48 48" fill="none">
+            <path d="M24 4 L42 11 V22 C42 33 34.5 41 24 44 C13.5 41 6 33 6 22 V11 Z" fill="#2d9e42" stroke="#e8f5e9" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M16 24 L21.5 29.5 L33 17" stroke="#0a0f0d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+          Node
+        </a>
+        <p>Barshan Dey's cybersecurity learning journal — built in public, updated regularly.</p>
       </div>
       <div>
-        <h3>Site</h3>
+        <h4 class="footer-heading">Site</h4>
         <ul class="footer-links">
           <li><a href="index.html">Home</a></li>
           <li><a href="blog.html">Blog</a></li>
@@ -238,7 +210,7 @@
         </ul>
       </div>
       <div>
-        <h3>Elsewhere</h3>
+        <h4 class="footer-heading">Elsewhere</h4>
         <ul class="footer-links">
           <li><a href="https://github.com/itzbarshandey-sudo" target="_blank" rel="noopener noreferrer">GitHub</a></li>
           <li><a href="https://www.youtube.com/@itsmeNode" target="_blank" rel="noopener noreferrer">YouTube</a></li>
@@ -247,10 +219,12 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>&copy; 2026 Barshan Dey. Built as a personal project.</span>
+      <span>&copy; 2026 Barshan Dey</span>
+      <span>Built as a personal project</span>
     </div>
   </div>
 </footer>
+
 </main>
 
 <script src="script.js"></script>
