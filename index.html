@@ -17,20 +17,26 @@
 <meta name="twitter:description" content="Cybersecurity learning notes, blog write-ups, and a resume, built while working toward a career in security." />
 <meta name="twitter:image" content="/assets/og-image.png" />
 <style>
-/* Critical CSS - Inline to prevent CLS */
+/* Critical CSS - Inline to prevent CLS and break dependency chain */
 @font-face{font-family:'Inter Fallback';src:local('Arial');font-display:swap;ascent-override:90%;descent-override:22%;line-gap-override:0%;size-adjust:107%}
 @font-face{font-family:'Baloo 2 Fallback';src:local('Arial');font-display:swap;ascent-override:95%;descent-override:25%;line-gap-override:0%;size-adjust:112%}
-:root{--font-sans:'Inter','Inter Fallback',system-ui,sans-serif;--font-display:'Baloo 2','Baloo 2 Fallback',system-ui,sans-serif}
-body{font-family:var(--font-sans);margin:0;padding:0}
-h1,h2,h3,h4,.brand{font-family:var(--font-display)}
+:root{--paper:#ffffff;--ink:#0f172a;--primary:#2d9e42;--font-sans:'Inter','Inter Fallback',system-ui,sans-serif;--font-display:'Baloo 2','Baloo 2 Fallback',system-ui,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font-sans);background:var(--paper);color:var(--ink);line-height:1.6}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-display);color:var(--ink)}
 .hero-art{min-height:480px;contain:layout style paint}
 .hero-sub{min-height:5em;contain:layout style}
+section{contain:layout style}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="style.css"></noscript>
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<!-- Defer font loading with media query to break dependency chain -->
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" as="style" media="print" onload="this.media='all';this.onload=null">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap"></noscript>
 </head>
 <body>
@@ -97,6 +103,7 @@ h1,h2,h3,h4,.brand{font-family:var(--font-display)}
   </div>
 </header>
 
+<main>
 <section id="about">
   <div class="wrap">
     <div class="section-head">
@@ -195,16 +202,17 @@ h1,h2,h3,h4,.brand{font-family:var(--font-display)}
     </div>
   </div>
 </section>
+</main>
 
 <footer class="site-footer">
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <h4>Node</h4>
+        <h2 style="font-size:1.125rem;margin-bottom:1rem;">Node</h2>
         <p>Barshan Dey's cybersecurity learning journal — network security, ethical hacking, and staying safe online.</p>
       </div>
       <div>
-        <h4>Site</h4>
+        <h2 style="font-size:1.125rem;margin-bottom:1rem;">Site</h2>
         <ul class="footer-links">
           <li><a href="index.html">Home</a></li>
           <li><a href="blog.html">Blog</a></li>
@@ -213,7 +221,7 @@ h1,h2,h3,h4,.brand{font-family:var(--font-display)}
         </ul>
       </div>
       <div>
-        <h4>Elsewhere</h4>
+        <h2 style="font-size:1.125rem;margin-bottom:1rem;">Elsewhere</h2>
         <ul class="footer-links">
           <li><a href="#">GitHub</a></li>
           <li><a href="#">LinkedIn</a></li>

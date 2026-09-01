@@ -181,7 +181,7 @@ section { padding: 6rem 0; }
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--primary);
+  color: #1a5631;
   margin-bottom: 1.5rem;
 }
 .dot { width: 8px; height: 8px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 12px var(--primary); animation: pulse 2s infinite; }
@@ -233,7 +233,7 @@ section { padding: 6rem 0; }
   cursor: pointer;
   border: 2px solid transparent;
 }
-.btn-primary { background: var(--primary); color: white; box-shadow: var(--shadow-md); }
+.btn-primary { background: var(--primary); color: white; box-shadow: var(--shadow-md); font-weight: 700; }
 .btn-primary:hover { background: var(--primary-hover); transform: translateY(-4px) scale(1.02); box-shadow: var(--stick-shadow); color: white; }
 .btn-dark { background: var(--ink); color: white; }
 .btn-dark:hover { background: #1e293b; transform: translateY(-4px) scale(1.02); box-shadow: var(--shadow-hover); color: white; }
