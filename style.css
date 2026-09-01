@@ -506,6 +506,392 @@ section { padding: 5rem 0; }
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s var(--ease-fluid), transform 0.8s var(--ease-fluid); }
 .reveal.is-active { opacity: 1; transform: translateY(0); }
 
+/* ─── Page Load Curtain ──────────────────────────────────────────── */
+.page-curtain {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none;
+  animation: curtain-up 1s var(--ease-fluid) 0.2s forwards;
+}
+.page-curtain::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  animation: curtain-line 1s var(--ease-fluid) forwards;
+}
+@keyframes curtain-up {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}
+@keyframes curtain-line {
+  0% { transform: translateY(0); opacity: 1; }
+  99% { transform: translateY(-100vh); opacity: 1; }
+  100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+/* Page enters with subtle fade-in once curtain lifts */
+body { animation: page-fade-in 0.6s var(--ease-fluid) 0.4s both; }
+@keyframes page-fade-in {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Scroll Progress Bar ────────────────────────────────────────── */
+.scroll-progress {
+  position: fixed; top: 0; left: 0;
+  height: 2px; width: 0;
+  background: linear-gradient(90deg, var(--accent), var(--info));
+  z-index: 1001;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
+/* ─── Custom Cursor (desktop only) ───────────────────────────────── */
+@media (hover: hover) and (pointer: fine) {
+  .cursor-dot, .cursor-ring {
+    position: fixed; pointer-events: none; z-index: 9998;
+    transition: transform 0.15s var(--ease-fluid), opacity 0.2s;
+  }
+  .cursor-dot {
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 12px var(--accent);
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1.5px solid var(--accent);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.4;
+  }
+  .cursor-ring.is-hover {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0.8;
+    border-color: var(--info);
+  }
+  .cursor-dot.is-hover {
+    transform: translate(-50%, -50%) scale(2);
+  }
+  @media (max-width: 1024px) {
+    .cursor-dot, .cursor-ring { display: none; }
+  }
+}
+
+/* ─── Floating Particles in Hero ─────────────────────────────────── */
+.hero-particles {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+.hero-particles span {
+  position: absolute;
+  width: 3px; height: 3px;
+  background: var(--accent);
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: float-up 8s linear infinite;
+  box-shadow: 0 0 6px var(--accent);
+}
+@keyframes float-up {
+  0% { transform: translateY(100vh) scale(0); opacity: 0; }
+  10% { opacity: 0.4; }
+  90% { opacity: 0.4; }
+  100% { transform: translateY(-20px) scale(1); opacity: 0; }
+}
+
+/* ─── Enhanced Brand Mark ─────────────────────────────────────────── */
+.brand svg {
+  filter: drop-shadow(0 0 0 transparent);
+  transition: filter 0.4s var(--ease-fluid), transform 0.3s var(--ease-spring);
+}
+.brand:hover svg {
+  filter: drop-shadow(0 0 8px var(--accent-glow));
+}
+
+/* ─── Nav Active Indicator (sliding) ──────────────────────────────── */
+.nav-links a {
+  position: relative;
+}
+.nav-links a::before {
+  content: '';
+  position: absolute;
+  left: 50%; bottom: 0;
+  width: 0; height: 1.5px;
+  background: var(--accent);
+  transition: width 0.3s var(--ease-fluid), left 0.3s var(--ease-fluid);
+  box-shadow: 0 0 6px var(--accent);
+}
+.nav-links a:hover::before { width: 60%; left: 20%; }
+.nav-links a.active::before { width: 80%; left: 10%; }
+
+/* ─── Button Magnetic Hover ───────────────────────────────────────── */
+.btn {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%);
+  transform: translateX(-100%);
+  transition: transform 0.6s var(--ease-fluid);
+  z-index: -1;
+}
+.btn:hover::before { transform: translateX(100%); }
+
+.btn-primary, .btn-secondary { overflow: hidden; }
+
+/* Liquid fill on primary button */
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%;
+  width: 0; height: 100%;
+  background: var(--accent-hover);
+  transform: translateX(-50%);
+  transition: width 0.4s var(--ease-fluid);
+  z-index: -2;
+}
+.btn-primary:hover::after { width: 100%; }
+
+/* Arrow shift on ghost button */
+.btn-ghost .arrow {
+  display: inline-block;
+  transition: transform 0.3s var(--ease-fluid);
+}
+.btn-ghost:hover .arrow { transform: translateX(4px); }
+
+/* Active press */
+.btn:active { transform: translateY(-1px) scale(0.98); }
+
+/* ─── Card 3D Tilt + Shine ────────────────────────────────────────── */
+.card, .post-card, .skill-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.card::after, .post-card::after, .skill-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -75%;
+  width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06) 50%, transparent);
+  transform: skewX(-20deg);
+  transition: left 0.7s var(--ease-fluid);
+  pointer-events: none;
+  z-index: 2;
+}
+.card:hover::after, .post-card:hover::after, .skill-card:hover::after { left: 125%; }
+
+/* ─── Form Field Polish ───────────────────────────────────────────── */
+.field { position: relative; }
+.field input, .field select, .field textarea {
+  transition: all 0.3s var(--ease-fluid);
+}
+.field input:hover, .field select:hover, .field textarea:hover {
+  border-color: var(--border-strong);
+}
+
+/* Floating label */
+.field.float-label label {
+  position: absolute;
+  top: 0.85rem; left: 1rem;
+  padding: 0;
+  color: var(--fg-dim);
+  font-size: 0.95rem;
+  pointer-events: none;
+  background: transparent;
+  transition: all 0.25s var(--ease-fluid);
+  font-family: var(--font-sans);
+  font-weight: 500;
+}
+.field.float-label input:focus + label,
+.field.float-label input:not(:placeholder-shown) + label,
+.field.float-label textarea:focus + label,
+.field.float-label textarea:not(:placeholder-shown) + label,
+.field.float-label select + label {
+  top: -0.4rem;
+  left: 0.7rem;
+  font-size: 0.7rem;
+  color: var(--accent);
+  background: var(--bg-elevated);
+  padding: 0 0.3rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Focus glow ring */
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(45, 158, 66, 0.15),
+              0 0 20px rgba(45, 158, 66, 0.1);
+  background: var(--bg-surface);
+}
+
+/* ─── Scroll-Triggered Staggered Reveal ───────────────────────────── */
+.stagger > * { opacity: 0; transform: translateY(20px); transition: opacity 0.6s var(--ease-fluid), transform 0.6s var(--ease-fluid); }
+.stagger.is-active > *:nth-child(1) { transition-delay: 0.05s; }
+.stagger.is-active > *:nth-child(2) { transition-delay: 0.15s; }
+.stagger.is-active > *:nth-child(3) { transition-delay: 0.25s; }
+.stagger.is-active > *:nth-child(4) { transition-delay: 0.35s; }
+.stagger.is-active > *:nth-child(5) { transition-delay: 0.45s; }
+.stagger.is-active > *:nth-child(6) { transition-delay: 0.55s; }
+.stagger.is-active > * { opacity: 1; transform: translateY(0); }
+
+/* ─── Hero Mascot: Parallax + Glow Pulse ──────────────────────────── */
+.hero-mascot {
+  animation: float 6s var(--ease-fluid) infinite alternate,
+             mascot-glow 4s var(--ease-fluid) infinite;
+}
+@keyframes mascot-glow {
+  0%, 100% { filter: drop-shadow(0 20px 48px rgba(0,0,0,0.6)) drop-shadow(0 0 0 transparent); }
+  50% { filter: drop-shadow(0 20px 48px rgba(0,0,0,0.6)) drop-shadow(0 0 40px rgba(45,158,66,0.15)); }
+}
+
+/* ─── Filter Pill Click Ripple ─────────────────────────────────────── */
+.filter-pill { position: relative; overflow: hidden; }
+.filter-pill::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 0; height: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.5s var(--ease-fluid), height 0.5s var(--ease-fluid);
+}
+.filter-pill:active::before { width: 200px; height: 200px; }
+
+/* ─── Footer Link Hover: Slide Right ──────────────────────────────── */
+.footer-links a {
+  display: inline-block;
+  position: relative;
+  transition: all 0.25s var(--ease-fluid);
+}
+.footer-links a:hover { padding-left: 8px; }
+
+/* ─── Footer Tech Marquee ─────────────────────────────────────────── */
+.footer-marquee {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 1.5rem 0;
+  overflow: hidden;
+  background: var(--bg-elevated);
+  margin-bottom: 3rem;
+}
+.marquee-track {
+  display: flex;
+  gap: 3rem;
+  animation: marquee 30s linear infinite;
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--fg-dim);
+}
+.marquee-track span { display: inline-flex; align-items: center; gap: 0.5rem; }
+.marquee-track span::before { content: '◆'; color: var(--accent); font-size: 0.6rem; }
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ─── Tagline Words: Enhanced Activation ─────────────────────────── */
+.tagline-text .tw {
+  position: relative;
+  display: inline-block;
+  margin-right: 0.25em;
+}
+.tagline-text .tw::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: var(--accent);
+  opacity: 0;
+  transition: opacity 0.6s var(--ease-fluid);
+  filter: blur(8px);
+}
+.tagline-text .tw.is-active::before { opacity: 0.4; }
+
+/* ─── Section Header Polish: Underline Accent ─────────────────────── */
+.section-title {
+  position: relative;
+  display: inline-block;
+}
+.section-header .section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px; left: 0;
+  width: 48px; height: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s var(--ease-fluid);
+}
+.section-header:hover .section-title::after { transform: scaleX(1); }
+
+/* ─── Stat Strip: Number Counter Shine ────────────────────────────── */
+.stat-strip .num {
+  position: relative;
+  background: linear-gradient(180deg, var(--accent) 0%, var(--accent-hover) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ─── CTA Section: Spotlight Following Mouse ─────────────────────── */
+.cta-block {
+  position: relative;
+  overflow: hidden;
+}
+.cta-block::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(400px at var(--mx, 50%) var(--my, 50%), rgba(45,158,66,0.06), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+.cta-block:hover::before { opacity: 1; }
+
+/* ─── Focus Visible: Universal ────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+  transition: outline-offset 0.15s;
+}
+.btn:focus-visible { outline-offset: 4px; }
+
+/* ─── Selection Polish ────────────────────────────────────────────── */
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+  text-shadow: none;
+}
+
+/* ─── Reduced Motion ──────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .page-curtain { display: none; }
+  body { animation: none; }
+}
+
 /* ─── Responsive ─────────────────────────────────────────────────── */
 @media (max-width: 960px) {
   .hero .wrap { grid-template-columns: 1fr; gap: 3rem; text-align: left; }
