@@ -41,9 +41,9 @@
   --shadow-glow-sm: 0 0 20px var(--accent-glow);
 
   /* Typography */
-  --font-mono: 'Geist Mono', 'SF Mono', 'Fira Code', 'JetBrains Mono', ui-monospace, monospace;
-  --font-sans: 'Geist Sans', 'Inter', system-ui, -apple-system, sans-serif;
-  --font-display: 'Geist Sans', 'Inter', system-ui, sans-serif;
+  --font-mono: 'Space Mono', ui-monospace, 'SF Mono', 'Fira Code', monospace;
+  --font-sans: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
 
   /* Transitions */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
