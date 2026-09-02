@@ -116,7 +116,14 @@
 .form-card.success-mode .form-success { display: flex; }
 
 .field { display: flex; flex-direction: column; }
-.field label { font-size: 0.85rem; font-weight: 500; margin-bottom: 0.5rem; color: var(--fg); }
+.field label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 0.55rem;
+  color: var(--fg);
+  letter-spacing: 0.005em;
+}
 .field input, .field select, .field textarea {
   padding: 0.75rem 1rem; background: var(--bg-muted);
   border: 1px solid var(--border); border-radius: var(--radius);

@@ -222,6 +222,7 @@
 }
 .tagline-text .tw {
   display: inline-block;
+  margin-right: 0.28em;
   opacity: 0.25;
   filter: blur(5px);
   transform: translateY(10px);
