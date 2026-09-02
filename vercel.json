@@ -1,9 +1,4 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
-  ],
   "headers": [
     {
       "source": "/assets/(.*)",
@@ -15,7 +10,7 @@
       ]
     },
     {
-      "source": "/(.*).css",
+      "source": "/style.css",
       "headers": [
         {
           "key": "Cache-Control",
@@ -24,7 +19,7 @@
       ]
     },
     {
-      "source": "/(.*).js",
+      "source": "/script.js",
       "headers": [
         {
           "key": "Cache-Control",
