@@ -1,3 +1,5 @@
+import { Link, NavLink } from 'react-router-dom';
+
 export default function SiteFooter() {
   return (
     <footer className="site-footer">
@@ -39,6 +41,3 @@ export default function SiteFooter() {
     </footer>
   );
 }
-
-// Local re-imports to keep the file standalone
-import { Link } from 'react-router-dom';

@@ -1,6 +1,4 @@
-import { useRef, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { setPendingClickXY } from '../../hooks/usePageCurtain.js';
+import { Link } from 'react-router-dom';
 
 export default function Button({
   to,
@@ -17,30 +15,22 @@ export default function Button({
     .filter(Boolean)
     .join(' ');
 
-  const handleClick = (e) => {
-    if (to) {
-      // Capture click for the page-curtain origin
-      setPendingClickXY(e.clientX, e.clientY);
-    }
-    onClick?.(e);
-  };
-
   if (to) {
     return (
-      <Link to={to} className={classes} onClick={handleClick} {...rest}>
+      <Link to={to} className={classes} onClick={onClick} {...rest}>
         {children}
       </Link>
     );
   }
   if (href) {
     return (
-      <a href={href} className={classes} onClick={handleClick} {...rest}>
+      <a href={href} className={classes} onClick={onClick} {...rest}>
         {children}
       </a>
     );
   }
   return (
-    <button className={classes} onClick={handleClick} {...rest}>
+    <button className={classes} onClick={onClick} {...rest}>
       {children}
     </button>
   );
