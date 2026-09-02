@@ -8,6 +8,7 @@ import Mascot from '../components/ui/Mascot.jsx';
 import useScrollReveal from '../hooks/useScrollReveal.js';
 import useParallax from '../hooks/useParallax.js';
 import { postsList } from '../data/posts.js';
+import profile from '../data/profile.js';
 import './Home.css';
 
 const skills = [
@@ -41,6 +42,13 @@ const skills = [
       { label: 'Linux CLI', category: 'privacy' },
     ],
   },
+];
+
+const stats = [
+  { num: '01', label: 'Post published' },
+  { num: 'Act', label: 'Learning mode' },
+  { num: '365', label: 'Day streak' },
+  { num: 'OSCP', label: 'On the horizon' },
 ];
 
 export default function Home() {
@@ -97,12 +105,15 @@ export default function Home() {
               Notes from the lab, write-ups from CTFs, and notes on everyday defense. Everything I learn goes here — in public — so you can see how I think.
             </p>
             <div className="hero-cta">
-              <Button to="/blog" variant="primary">Read the blog</Button>
+              <Button to="/blog" variant="primary">Read the blog →</Button>
               <Button to="/resume" variant="ghost">View resume</Button>
             </div>
             <p className="hero-proof">
-              <span className="eyebrow-dot"></span>
-              1 post published &nbsp;·&nbsp; Actively learning &nbsp;·&nbsp; Kolkata, India
+              <span><strong>1</strong> post live</span>
+              <span className="sep">·</span>
+              <span><strong>Actively</strong> learning</span>
+              <span className="sep">·</span>
+              <span><strong>Kolkata, IN</strong></span>
             </p>
           </div>
           <div className="hero-art" aria-hidden="true" ref={mascotRef}>
@@ -111,12 +122,24 @@ export default function Home() {
         </div>
       </header>
 
+      {/* Stats strip — terminal-styled numbers */}
+      <section className="stats-strip" aria-label="Stats">
+        <div className="wrap stats-grid">
+          {stats.map((s) => (
+            <div key={s.label} className="stat-cell">
+              <span className="stat-num">{s.num}</span>
+              <span className="stat-label">{s.label}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Tagline */}
       <section className="tagline-section" aria-label="Tagline">
         <div className="wrap">
           <p className="tagline-text" id="tagline-text" ref={taglineRef}>
             <span className="tw">Learning</span>
-            <span className="tw">security</span>
+            <span className="tw accent">security</span>
             <span className="tw">is</span>
             <span className="tw">a</span>
             <span className="tw">craft.</span>
@@ -126,6 +149,28 @@ export default function Home() {
             <span className="tw">every</span>
             <span className="tw">step.</span>
           </p>
+        </div>
+      </section>
+
+      {/* Currently — a personal-site trope, like a GitHub pinned section */}
+      <section className="currently-section">
+        <div className="wrap">
+          <div className="currently-card">
+            <div className="currently-marker">
+              <span className="currently-pulse"></span>
+              <span>Now</span>
+            </div>
+            <h3 className="currently-title">Working through the TCM Security Practical Ethical Hacking course</h3>
+            <p className="currently-body">
+              Building a home lab on Proxmox, running daily HackTheBox easy boxes, and writing up the methodology for each one. Next: buffer overflow fundamentals.
+            </p>
+            <div className="currently-tags">
+              <span className="pill-tag tag-network">PEH</span>
+              <span className="pill-tag tag-web">HackTheBox</span>
+              <span className="pill-tag tag-malware">Proxmox</span>
+              <span className="pill-tag tag-privacy">Linux</span>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -151,7 +196,7 @@ export default function Home() {
       <section className="section-resume" id="resume">
         <div className="wrap">
           <SectionHeader
-            label="What I&apos;m building"
+            label="What I'm building"
             title="Skills in progress,<br />not just on paper."
             action={<LearnMoreLink to="/resume" className="btn btn-ghost btn-sm">Full resume</LearnMoreLink>}
           />
@@ -161,7 +206,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* CTA — terminal prompt */}
       <section className="section-cta">
         <div className="wrap">
           <div className="cta-block">
@@ -171,7 +216,8 @@ export default function Home() {
             </p>
             <h2 className="cta-headline">Working on something interesting,<br />or want to talk security?</h2>
             <p className="cta-body">Responsible disclosures, collaboration ideas, or just a question about a post — I read everything and reply when I can.</p>
-            <Button to="/contact" variant="primary">Send a message</Button>
+            <Button to="/contact" variant="primary">Send a message →</Button>
+            <p className="prompt">node --contact --reply-within=48h<span className="cursor"></span></p>
           </div>
         </div>
       </section>
