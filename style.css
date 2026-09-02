@@ -119,103 +119,94 @@ body {
   to { opacity: 1; }
 }
 
-/* ─── Custom Page Transition: origin-aware scanline wipe ────── */
+/* ─── Custom Page Transition: terminal boot-up cover ────────── */
+/* The cover lives in the markup directly so it's painted on the very first frame,
+   before any JS runs. The animation then slides it up off the screen. */
+
 .page-curtain {
   position: fixed; inset: 0;
-  pointer-events: none;
   z-index: 9999;
-  --curtain-x: 50vw;
-  --curtain-y: 50vh;
-}
-.page-curtain .curtain-mask {
-  position: absolute; inset: 0;
+  pointer-events: none;
   background: var(--accent);
-  /* Subtle scanline texture inside the mask itself — only visible while covering the page */
+  /* CRT scanline texture inside the cover, only visible while it covers the page */
   background-image: repeating-linear-gradient(
     0deg,
     rgba(0, 0, 0, 0) 0px,
     rgba(0, 0, 0, 0) 2px,
-    rgba(0, 0, 0, 0.08) 3px,
+    rgba(0, 0, 0, 0.12) 3px,
     rgba(0, 0, 0, 0) 4px
   );
-  clip-path: circle(0 at var(--curtain-x) var(--curtain-y));
-  will-change: clip-path, opacity;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Default: cover is OFF the screen (skipped if no transition was triggered) */
+  transform: translateY(-100%);
+  will-change: transform;
 }
-.page-curtain .curtain-scanline {
+.page-curtain.is-active {
+  /* Active cover: starts fully on-screen, slides up off the top */
+  transform: translateY(0);
+  animation: page-curtain-rise 850ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+.page-curtain.is-active::before {
+  /* A single bright scanline that races up with the cover */
+  content: '';
   position: absolute;
   left: 0; right: 0;
   height: 2px;
-  background: #e8f5e9;
-  box-shadow:
-    0 0 18px var(--accent),
-    0 0 6px var(--accent-hover),
-    0 0 2px #ffffff;
-  top: calc(var(--curtain-y) - 1px);
+  background: #ffffff;
+  box-shadow: 0 0 24px var(--accent), 0 0 8px var(--accent-hover);
+  top: 0;
+  animation: page-curtain-scan 850ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+.page-curtain.is-active::after {
+  /* Origin marker: a brief glow at the click point that fades as the cover rises */
+  content: '';
+  position: absolute;
+  left: var(--curtain-x, 50vw);
+  top: var(--curtain-y, 50vh);
+  width: 200px; height: 200px;
+  margin-left: -100px; margin-top: -100px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 60%);
+  animation: page-curtain-origin 850ms ease-out forwards;
+}
+.page-curtain .curtain-label {
+  position: absolute;
+  bottom: 18%; left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: rgba(10, 15, 13, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
   opacity: 0;
-  will-change: opacity, transform;
-}
-.page-curtain .curtain-corners {
-  position: absolute; inset: 0;
-  border: 1px solid var(--accent);
-  clip-path: circle(0 at var(--curtain-x) var(--curtain-y));
-  opacity: 0.5;
-  will-change: clip-path, opacity;
+  animation: page-curtain-label 850ms ease-out forwards;
 }
 
-/* Opening — outgoing page: mask expands from click point, scanline rides the wave */
-.page-curtain.is-opening .curtain-mask {
-  animation: curtain-mask-open 320ms var(--ease-smooth-out) forwards;
+@keyframes page-curtain-rise {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
 }
-.page-curtain.is-opening .curtain-scanline {
-  animation: curtain-scan-open 320ms var(--ease-smooth-out) forwards;
+@keyframes page-curtain-scan {
+  0%   { top: 100%; opacity: 0; }
+  10%  { opacity: 1; }
+  100% { top: 0;   opacity: 0; }
 }
-.page-curtain.is-opening .curtain-corners {
-  animation: curtain-corners-open 320ms var(--ease-smooth-out) forwards;
+@keyframes page-curtain-origin {
+  0%   { opacity: 1; transform: scale(0); }
+  30%  { opacity: 1; transform: scale(1.2); }
+  100% { opacity: 0; transform: scale(2.5); }
 }
-
-/* Closing — incoming page: mask retracts to a point and scanline collapses */
-.page-curtain.is-closing .curtain-mask {
-  animation: curtain-mask-close 380ms var(--ease-smooth-out) forwards;
-}
-.page-curtain.is-closing .curtain-scanline {
-  animation: curtain-scan-close 380ms var(--ease-smooth-out) forwards;
-}
-.page-curtain.is-closing .curtain-corners {
-  animation: curtain-corners-close 380ms var(--ease-smooth-out) forwards;
-}
-
-@keyframes curtain-mask-open {
-  0%   { clip-path: circle(0 at var(--curtain-x) var(--curtain-y)); }
-  100% { clip-path: circle(150% at var(--curtain-x) var(--curtain-y)); }
-}
-@keyframes curtain-corners-open {
-  0%   { clip-path: circle(0 at var(--curtain-x) var(--curtain-y)); opacity: 0.7; }
-  100% { clip-path: circle(150% at var(--curtain-x) var(--curtain-y)); opacity: 0; }
-}
-@keyframes curtain-scan-open {
-  0%   { opacity: 1; transform: scaleX(0.4); }
-  35%  { opacity: 1; transform: scaleX(1); }
-  100% { opacity: 0; transform: scaleX(1); }
-}
-@keyframes curtain-mask-close {
-  0%   { clip-path: circle(150% at var(--curtain-x) var(--curtain-y)); }
-  100% { clip-path: circle(0 at var(--curtain-x) var(--curtain-y)); }
-}
-@keyframes curtain-corners-close {
-  0%   { clip-path: circle(150% at var(--curtain-x) var(--curtain-y)); opacity: 0; }
-  50%  { clip-path: circle(150% at var(--curtain-x) var(--curtain-y)); opacity: 0.6; }
-  100% { clip-path: circle(0 at var(--curtain-x) var(--curtain-y)); opacity: 0; }
-}
-@keyframes curtain-scan-close {
-  0%   { opacity: 0; transform: scaleX(1); }
-  20%  { opacity: 0.9; transform: scaleX(1); }
-  60%  { opacity: 0.7; transform: scaleX(0.6); }
-  100% { opacity: 0; transform: scaleX(0.1); }
+@keyframes page-curtain-label {
+  0%   { opacity: 0; transform: translate(-50%, 8px); }
+  20%  { opacity: 0.7; }
+  80%  { opacity: 0.7; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(-50%, -8px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .page-curtain { display: none !important; }
-  .page-curtain * { animation: none !important; }
 }
 
 h1, h2, h3, h4 { font-weight: 700; line-height: 1.15; color: var(--fg); letter-spacing: -0.02em; }

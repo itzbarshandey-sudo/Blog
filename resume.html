@@ -37,6 +37,11 @@
 </head>
 <body>
 
+<!-- Page transition cover: always in the DOM, hidden by default, animated when triggered -->
+<div class="page-curtain" id="page-curtain" aria-hidden="true">
+  <span class="curtain-label">loading</span>
+</div>
+
 <nav class="site-nav print-hide">
   <div class="wrap">
     <a href="index.html" class="brand">
@@ -218,31 +223,39 @@
 </main>
 
 <script>
-  // Custom page transition: origin-aware terminal scanline wipe.
-  // A green mask expands outward from the click point with a CRT scanline
-  // riding the leading edge, then retracts on the new page to reveal it.
+  // Custom page transition: terminal cover that slides up on every page load.
+  // Cover is always in the DOM. When a user clicks an internal link, the click
+  // coords are stashed, navigation happens, and the new page's cover animates
+  // up to reveal the content. Direct loads skip the animation.
   (function() {
     var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var nav = performance.getEntriesByType('navigation')[0];
-    var fromTransition = nav && nav.type === 'navigate' &&
-      sessionStorage.getItem('__page_transition') === '1';
+    var pendingXY = null;
+    try {
+      pendingXY = JSON.parse(sessionStorage.getItem('__page_curtain_xy') || 'null');
+    } catch (_) {}
+    var triggered = sessionStorage.getItem('__page_transition') === '1';
 
-    function spawnCurtain(x, y, mode) {
-      var c = document.createElement('div');
-      c.className = 'page-curtain is-' + mode;
-      c.style.setProperty('--curtain-x', x + 'px');
-      c.style.setProperty('--curtain-y', y + 'px');
-      c.innerHTML =
-        '<div class="curtain-mask"></div>' +
-        '<div class="curtain-scanline"></div>' +
-        '<div class="curtain-corners"></div>';
-      document.body.appendChild(c);
-      c.addEventListener('animationend', function() {
-        if (c.parentNode) c.parentNode.removeChild(c);
-      }, { once: true });
+    if (triggered && !reduce) {
+      var cover = document.getElementById('page-curtain');
+      if (cover && pendingXY) {
+        cover.style.setProperty('--curtain-x', pendingXY[0] + 'px');
+        cover.style.setProperty('--curtain-y', pendingXY[1] + 'px');
+      }
+      if (cover) {
+        requestAnimationFrame(function() {
+          requestAnimationFrame(function() {
+            cover.classList.add('is-active');
+            cover.addEventListener('animationend', function() {
+              cover.remove();
+            }, { once: true });
+          });
+        });
+      }
     }
 
-    // Outgoing: capture click, spawn the opening curtain, navigate immediately.
+    sessionStorage.removeItem('__page_transition');
+    sessionStorage.removeItem('__page_curtain_xy');
+
     document.addEventListener('click', function(e) {
       var link = e.target.closest('a[href]');
       if (!link) return;
@@ -253,29 +266,8 @@
       e.preventDefault();
       sessionStorage.setItem('__page_transition', '1');
       sessionStorage.setItem('__page_curtain_xy', JSON.stringify([e.clientX, e.clientY]));
-      if (reduce) { window.location.href = href; return; }
-      spawnCurtain(e.clientX, e.clientY, 'opening');
-      // Curtain fully covers the screen by the time the new page paints.
       window.location.href = href;
     });
-
-    // Incoming: retract the curtain on the new page so the new content is revealed.
-    if (fromTransition && !reduce) {
-      var raw = sessionStorage.getItem('__page_curtain_xy');
-      if (raw) {
-        try {
-          var xy = JSON.parse(raw);
-          // Defer two frames so the new page is fully laid out before the curtain retires.
-          requestAnimationFrame(function() {
-            requestAnimationFrame(function() {
-              spawnCurtain(xy[0], xy[1], 'closing');
-            });
-          });
-        } catch (_) {}
-      }
-      sessionStorage.removeItem('__page_transition');
-      sessionStorage.removeItem('__page_curtain_xy');
-    }
   })();
 </script>
 <script src="script.js"></script>
