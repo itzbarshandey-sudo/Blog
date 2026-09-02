@@ -47,7 +47,18 @@
       Node
     </a>
     <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
-      <span></span>
+      <span class="t-icon-swap" data-state="a">
+        <span class="t-icon" data-icon="a" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12h18M3 6h18M3 18h18"/>
+          </svg>
+        </span>
+        <span class="t-icon" data-icon="b" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </span>
+      </span>
     </button>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
@@ -117,15 +128,19 @@
           <p>Thanks — your message looks good. (This is a front-end demo, so nothing was actually sent yet — wire this form up to your backend or a form service.)</p>
         </div>
         <form id="contact-form" novalidate>
-          <div class="field">
+          <div class="field t-input-wrap">
             <label for="name">Your name</label>
-            <input type="text" id="name" name="name" placeholder="Jordan Lee" autocomplete="name" />
-            <div class="field-error">Please enter at least 2 characters.</div>
+            <div class="t-input">
+              <input type="text" id="name" name="name" placeholder="Jordan Lee" autocomplete="name" />
+            </div>
+            <div class="field-error t-error-msg">Please enter at least 2 characters.</div>
           </div>
-          <div class="field">
+          <div class="field t-input-wrap">
             <label for="email">Email address</label>
-            <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" />
-            <div class="field-error">Please enter a valid email address.</div>
+            <div class="t-input">
+              <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" />
+            </div>
+            <div class="field-error t-error-msg">Please enter a valid email address.</div>
           </div>
           <div class="field">
             <label for="topic">What's this about</label>
@@ -137,10 +152,12 @@
               <option>Something else</option>
             </select>
           </div>
-          <div class="field">
+          <div class="field t-input-wrap">
             <label for="message">Message</label>
-            <textarea id="message" name="message" placeholder="What's on your mind?"></textarea>
-            <div class="field-error">Please write at least 10 characters.</div>
+            <div class="t-input">
+              <textarea id="message" name="message" placeholder="What's on your mind?"></textarea>
+            </div>
+            <div class="field-error t-error-msg">Please write at least 10 characters.</div>
           </div>
           <button type="submit" class="btn btn-primary btn-block">Send message</button>
           <p class="form-note">This form validates in the browser only — connect it to a real endpoint before going live.</p>
@@ -192,20 +209,70 @@
 </main>
 
 <script>
-  // Page transition: fade out before navigation
+  // Custom page transition: origin-aware terminal scanline wipe.
+  // A green mask expands outward from the click point with a CRT scanline
+  // riding the leading edge, then retracts on the new page to reveal it.
   (function() {
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var nav = performance.getEntriesByType('navigation')[0];
+    var fromTransition = nav && nav.type === 'navigate' &&
+      sessionStorage.getItem('__page_transition') === '1';
+
+    function spawnCurtain(x, y, mode) {
+      var c = document.createElement('div');
+      c.className = 'page-curtain is-' + mode;
+      c.style.setProperty('--curtain-x', x + 'px');
+      c.style.setProperty('--curtain-y', y + 'px');
+      c.innerHTML =
+        '<div class="curtain-mask"></div>' +
+        '<div class="curtain-scanline"></div>' +
+        '<div class="curtain-corners"></div>';
+      document.body.appendChild(c);
+      c.addEventListener('animationend', function() {
+        if (c.parentNode) c.parentNode.removeChild(c);
+      }, { once: true });
+    }
+
+    // Outgoing: capture click, spawn the opening curtain, navigate immediately.
     document.addEventListener('click', function(e) {
       var link = e.target.closest('a[href]');
       if (!link) return;
       var href = link.getAttribute('href');
-      if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('http') ||
-          link.target === '_blank' || e.ctrlKey || e.metaKey || e.shiftKey) return;
+      if (!href || href.startsWith('#') || href.startsWith('mailto:') ||
+          href.startsWith('http') || link.target === '_blank' ||
+          e.ctrlKey || e.metaKey || e.shiftKey || e.button !== 0) return;
       e.preventDefault();
-      document.body.classList.add('page-leaving');
-      setTimeout(function() { window.location.href = href; }, 180);
+      sessionStorage.setItem('__page_transition', '1');
+      sessionStorage.setItem('__page_curtain_xy', JSON.stringify([e.clientX, e.clientY]));
+      if (reduce) { window.location.href = href; return; }
+      spawnCurtain(e.clientX, e.clientY, 'opening');
+      // Curtain fully covers the screen by the time the new page paints.
+      window.location.href = href;
     });
+
+    // Incoming: retract the curtain on the new page so the new content is revealed.
+    if (fromTransition && !reduce) {
+      var raw = sessionStorage.getItem('__page_curtain_xy');
+      if (raw) {
+        try {
+          var xy = JSON.parse(raw);
+          // Defer two frames so the new page is fully laid out before the curtain retires.
+          requestAnimationFrame(function() {
+            requestAnimationFrame(function() {
+              spawnCurtain(xy[0], xy[1], 'closing');
+            });
+          });
+        } catch (_) {}
+      }
+      sessionStorage.removeItem('__page_transition');
+      sessionStorage.removeItem('__page_curtain_xy');
+    }
   })();
 </script>
 <script src="script.js"></script>
+<script type="module">
+  import { defineMorphIcon } from "morphicons/element";
+  defineMorphIcon();
+</script>
 </body>
 </html>

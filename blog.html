@@ -47,7 +47,18 @@
       Node
     </a>
     <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
-      <span></span>
+      <span class="t-icon-swap" data-state="a">
+        <span class="t-icon" data-icon="a" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12h18M3 6h18M3 18h18"/>
+          </svg>
+        </span>
+        <span class="t-icon" data-icon="b" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </span>
+      </span>
     </button>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
@@ -105,7 +116,10 @@
       </p>
       <h2 class="cta-headline">Have a question<br>about a post?</h2>
       <p class="cta-body">I'm always happy to go deeper on anything I've written, or hear about what you're working on.</p>
-      <a href="contact.html" class="btn btn-secondary">Get in touch</a>
+      <a href="contact.html" class="btn btn-secondary">
+          <morph-icon icon="M19 11H5v2h14v-2z M19 5H5v2h14V5z M19 19H5v2h14v-2z" size="18" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" label="Contact"></morph-icon>
+          Get in touch
+        </a>
     </div>
   </div>
 </section>
@@ -151,21 +165,71 @@
 </main>
 
 <script>
-  // Page transition: fade out before navigation
+  // Custom page transition: origin-aware terminal scanline wipe.
+  // A green mask expands outward from the click point with a CRT scanline
+  // riding the leading edge, then retracts on the new page to reveal it.
   (function() {
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var nav = performance.getEntriesByType('navigation')[0];
+    var fromTransition = nav && nav.type === 'navigate' &&
+      sessionStorage.getItem('__page_transition') === '1';
+
+    function spawnCurtain(x, y, mode) {
+      var c = document.createElement('div');
+      c.className = 'page-curtain is-' + mode;
+      c.style.setProperty('--curtain-x', x + 'px');
+      c.style.setProperty('--curtain-y', y + 'px');
+      c.innerHTML =
+        '<div class="curtain-mask"></div>' +
+        '<div class="curtain-scanline"></div>' +
+        '<div class="curtain-corners"></div>';
+      document.body.appendChild(c);
+      c.addEventListener('animationend', function() {
+        if (c.parentNode) c.parentNode.removeChild(c);
+      }, { once: true });
+    }
+
+    // Outgoing: capture click, spawn the opening curtain, navigate immediately.
     document.addEventListener('click', function(e) {
       var link = e.target.closest('a[href]');
       if (!link) return;
       var href = link.getAttribute('href');
-      if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('http') ||
-          link.target === '_blank' || e.ctrlKey || e.metaKey || e.shiftKey) return;
+      if (!href || href.startsWith('#') || href.startsWith('mailto:') ||
+          href.startsWith('http') || link.target === '_blank' ||
+          e.ctrlKey || e.metaKey || e.shiftKey || e.button !== 0) return;
       e.preventDefault();
-      document.body.classList.add('page-leaving');
-      setTimeout(function() { window.location.href = href; }, 180);
+      sessionStorage.setItem('__page_transition', '1');
+      sessionStorage.setItem('__page_curtain_xy', JSON.stringify([e.clientX, e.clientY]));
+      if (reduce) { window.location.href = href; return; }
+      spawnCurtain(e.clientX, e.clientY, 'opening');
+      // Curtain fully covers the screen by the time the new page paints.
+      window.location.href = href;
     });
+
+    // Incoming: retract the curtain on the new page so the new content is revealed.
+    if (fromTransition && !reduce) {
+      var raw = sessionStorage.getItem('__page_curtain_xy');
+      if (raw) {
+        try {
+          var xy = JSON.parse(raw);
+          // Defer two frames so the new page is fully laid out before the curtain retires.
+          requestAnimationFrame(function() {
+            requestAnimationFrame(function() {
+              spawnCurtain(xy[0], xy[1], 'closing');
+            });
+          });
+        } catch (_) {}
+      }
+      sessionStorage.removeItem('__page_transition');
+      sessionStorage.removeItem('__page_curtain_xy');
+    }
   })();
 </script>
 <script src="script.js"></script>
 <script src="blog.js"></script>
+<script type="module">
+  import { defineMorphIcon } from "morphicons/element";
+  defineMorphIcon();
+</script>
 </body>
 </html>

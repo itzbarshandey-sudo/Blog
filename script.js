@@ -2,23 +2,31 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // 1. Mobile nav
-  const navToggle = document.querySelector('.nav-toggle');
-  const navLinks = document.querySelector('.nav-links');
-  if (navToggle && navLinks) {
+  // 1. Mobile nav with icon-swap toggle (all pages)
+  document.querySelectorAll('.nav-toggle').forEach(navToggle => {
+    const navLinks = navToggle.closest('.site-nav')?.querySelector('.nav-links');
+    const navIconSwap = navToggle.querySelector('.t-icon-swap');
+    if (!navLinks) return;
+
+    function setNavState(expanded) {
+      navToggle.setAttribute('aria-expanded', expanded);
+      navLinks.classList.toggle('active', expanded);
+      if (navIconSwap) {
+        navIconSwap.setAttribute('data-state', expanded ? 'b' : 'a');
+      }
+    }
+
     navToggle.addEventListener('click', (e) => {
       e.stopPropagation();
       const expanded = navToggle.getAttribute('aria-expanded') === 'true';
-      navToggle.setAttribute('aria-expanded', !expanded);
-      navLinks.classList.toggle('active');
+      setNavState(!expanded);
     });
     document.addEventListener('click', (e) => {
       if (!e.target.closest('.site-nav') && navLinks.classList.contains('active')) {
-        navLinks.classList.remove('active');
-        navToggle.setAttribute('aria-expanded', 'false');
+        setNavState(false);
       }
     });
-  }
+  });
 
   // 2. Nav scroll effect
   const siteNav = document.querySelector('.site-nav');
@@ -81,35 +89,119 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 6. Contact form validation
+  // 5b. Card hover tilt (3D tilt with cursor-tracked glare)
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  document.querySelectorAll('.t-tilt').forEach(tilt => {
+    const card = tilt.querySelector('.t-tilt-card');
+    if (!card) return;
+    const MAX = 12; // peak tilt in degrees
+
+    function resetTilt() {
+      tilt.classList.remove('is-hover');
+      card.classList.remove('is-tilting');
+      card.style.setProperty('--tilt-rx', '0deg');
+      card.style.setProperty('--tilt-ry', '0deg');
+    }
+
+    tilt.addEventListener('pointerdown', (e) => {
+      if (e.pointerType !== 'mouse') {
+        try { tilt.setPointerCapture(e.pointerId); } catch (_) {}
+      }
+    });
+    tilt.addEventListener('pointermove', (e) => {
+      if (reduce.matches) return;
+      const r = tilt.getBoundingClientRect();
+      const px = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+      const py = Math.min(1, Math.max(0, (e.clientY - r.top) / r.height));
+      tilt.classList.add('is-hover');
+      card.classList.add('is-tilting');
+      card.style.setProperty('--tilt-ry', ((px - 0.5) * MAX).toFixed(2) + 'deg');
+      card.style.setProperty('--tilt-rx', ((0.5 - py) * MAX).toFixed(2) + 'deg');
+      card.style.setProperty('--tilt-gx', (px * 100).toFixed(1) + '%');
+      card.style.setProperty('--tilt-gy', (py * 100).toFixed(1) + '%');
+    });
+    tilt.addEventListener('pointerup', resetTilt);
+    tilt.addEventListener('pointercancel', resetTilt);
+    tilt.addEventListener('pointerleave', (e) => {
+      if (e.pointerType === 'mouse') resetTilt();
+    });
+  });
+
+  // 6. Contact form validation with error shake animation
   const contactForm = document.getElementById('contact-form');
   const formCard = document.querySelector('.form-card');
   if (contactForm && formCard) {
+    // Read CSS variables for shake timing
+    const rootStyle = getComputedStyle(document.documentElement);
+    const shakeMs = (parseFloat(rootStyle.getPropertyValue('--shake-dur-a')) || 80) * 2
+                  + (parseFloat(rootStyle.getPropertyValue('--shake-dur-b')) || 60) * 2;
+    const holdMs = parseFloat(rootStyle.getPropertyValue('--revert-hold')) || 3000;
+
+    function showError(field) {
+      if (!field) return;
+      const input = field.querySelector('.t-input');
+      if (!input) {
+        // Fallback: apply error class directly (backward compat)
+        field.classList.add('error');
+        return;
+      }
+
+      field.classList.add('is-error', 'error');
+      input.classList.add('is-error');
+
+      // Replay the shake from a clean baseline
+      input.classList.remove('is-shaking');
+      void input.offsetWidth;
+      input.classList.add('is-shaking');
+
+      setTimeout(() => input.classList.remove('is-shaking'), shakeMs + 20);
+
+      // Auto-revert after hold
+      if (field._revertTimer) clearTimeout(field._revertTimer);
+      field._revertTimer = setTimeout(() => {
+        field._revertTimer = null;
+        field.classList.remove('is-error', 'error');
+        input.classList.remove('is-error');
+      }, shakeMs + holdMs);
+    }
+
+    function clearError(field) {
+      if (!field) return;
+      const input = field.querySelector('.t-input');
+      if (field._revertTimer) {
+        clearTimeout(field._revertTimer);
+        field._revertTimer = null;
+      }
+      field.classList.remove('is-error', 'error');
+      if (input) input.classList.remove('is-error', 'is-shaking');
+    }
+
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
       let isValid = true;
-      document.querySelectorAll('.field.error').forEach(f => f.classList.remove('error'));
+      document.querySelectorAll('.field.error').forEach(f => clearError(f));
 
       const name = contactForm.elements['name'];
       const email = contactForm.elements['email'];
       const message = contactForm.elements['message'];
 
       if (!name.value || name.value.trim().length < 2) {
-        name.closest('.field').classList.add('error'); isValid = false;
+        showError(name.closest('.field')); isValid = false;
       }
       const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!email.value || !emailRe.test(email.value)) {
-        email.closest('.field').classList.add('error'); isValid = false;
+        showError(email.closest('.field')); isValid = false;
       }
       if (!message.value || message.value.trim().length < 10) {
-        message.closest('.field').classList.add('error'); isValid = false;
+        showError(message.closest('.field')); isValid = false;
       }
 
       if (isValid) formCard.classList.add('success-mode');
     });
 
+    // Typing cancels the auto-revert
     contactForm.querySelectorAll('input, textarea').forEach(input => {
-      input.addEventListener('input', () => input.closest('.field')?.classList.remove('error'));
+      input.addEventListener('input', () => clearError(input.closest('.field')));
     });
   }
 
