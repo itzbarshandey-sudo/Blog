@@ -1,0 +1,45 @@
+.resume-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2rem;
+  align-items: flex-start;
+}
+.resume-side { display: flex; flex-direction: column; gap: 1rem; position: sticky; top: 100px; }
+.resume-side .card h3 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 1rem; }
+.resume-side .skill-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.resume-contact { display: flex; flex-direction: column; gap: 0.5rem; }
+.resume-contact a { font-size: 0.85rem; color: var(--fg-muted); }
+.resume-contact a:hover { color: var(--accent); }
+
+.resume-main { display: flex; flex-direction: column; gap: 1rem; }
+.resume-main .card h3 { font-size: 1.1rem; margin-bottom: 1rem; }
+.resume-main .card h4 { font-size: 1rem; margin-bottom: 0.25rem; }
+
+.timeline { display: flex; flex-direction: column; gap: 1.25rem; }
+.timeline-item { padding-left: 1rem; border-left: 2px solid var(--accent); }
+.timeline-item .when { font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent); }
+.timeline-item h4 { margin: 0.25rem 0 0.2rem; }
+.timeline-item .org { font-size: 0.85rem; color: var(--fg-dim); }
+.timeline-item p { font-size: 0.9rem; margin-top: 0.4rem; }
+
+.project-list { display: flex; flex-direction: column; gap: 1.5rem; }
+.project-item h4 { margin-bottom: 0.4rem; }
+.project-item .pill-tag { margin-top: 0.5rem; display: inline-block; }
+.link-row { display: inline-block; margin-top: 0.5rem; font-size: 0.85rem; color: var(--accent); }
+.link-row:hover { text-decoration: underline; }
+
+.print-only { display: none; }
+@media print {
+  .print-hide { display: none !important; }
+  .print-only { display: block; padding: 1rem; color: #000; background: #fff; }
+  .print-only h1 { color: #000; }
+  .print-only h2 { color: #000; margin-top: 1.5rem; }
+  .print-only p { color: #000; }
+  body { background: #fff; color: #000; }
+  .site-nav, .site-footer { display: none !important; }
+}
+
+@media (max-width: 960px) {
+  .resume-layout { grid-template-columns: 1fr; }
+  .resume-side { position: static; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+}

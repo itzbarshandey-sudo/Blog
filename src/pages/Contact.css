@@ -1,0 +1,18 @@
+.contact-section { padding: 3rem 0 5rem; }
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 2rem;
+  align-items: flex-start;
+}
+.contact-info .card h3 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 1rem; }
+.contact-info .link-row {
+  display: block; padding: 0.4rem 0;
+  font-size: 0.9rem; color: var(--fg-muted);
+  text-decoration: none;
+}
+.contact-info .link-row:hover { color: var(--accent); }
+
+@media (max-width: 960px) {
+  .contact-grid { grid-template-columns: 1fr; }
+}
