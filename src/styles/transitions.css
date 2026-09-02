@@ -1,4 +1,4 @@
-/* Scroll reveal (texts reveal) */
+/* Scroll reveal (texts reveal — staggered blurred rise) */
 .reveal {
   opacity: 0;
   transform: translateY(var(--stagger-distance));
@@ -10,6 +10,24 @@
   will-change: transform, opacity, filter;
 }
 .reveal.is-active {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Stagger container — children animate one after another based on --stagger-index */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(var(--stagger-distance));
+  filter: blur(var(--stagger-blur));
+  transition:
+    opacity var(--stagger-dur) var(--stagger-ease),
+    transform var(--stagger-dur) var(--stagger-ease),
+    filter var(--stagger-dur) var(--stagger-ease);
+  transition-delay: calc(var(--stagger-stagger) * var(--stagger-index, 0));
+  will-change: transform, opacity, filter;
+}
+.reveal-stagger.is-active > * {
   opacity: 1;
   transform: translateY(0);
   filter: blur(0);

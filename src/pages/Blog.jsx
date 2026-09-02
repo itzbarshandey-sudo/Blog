@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import PillTag from '../components/ui/PillTag.jsx';
 import Button from '../components/ui/Button.jsx';
+import Mascot from '../components/ui/Mascot.jsx';
 import { postsList } from '../data/posts.js';
 import useScrollReveal from '../hooks/useScrollReveal.js';
 import './Blog.css';
@@ -27,13 +28,18 @@ export default function Blog() {
   return (
     <div ref={revealRef}>
       <header className="page-hero">
-        <div className="wrap">
-          <p className="section-label">
-            <span className="label-dot"></span>
-            The blog
-          </p>
-          <h1 className="page-title">Notes, write-ups,<br />lessons learned.</h1>
-          <p className="page-sub">What I&apos;m learning, what worked, and what broke. Short, honest posts about security and building.</p>
+        <div className="wrap page-hero-wrap">
+          <div className="page-hero-copy">
+            <p className="section-label">
+              <span className="label-dot"></span>
+              The blog
+            </p>
+            <h1 className="page-title">Notes, write-ups,<br />lessons learned.</h1>
+            <p className="page-sub">What I&apos;m learning, what worked, and what broke. Short, honest posts about security and building.</p>
+          </div>
+          <div className="page-hero-art" aria-hidden="true">
+            <Mascot src="/assets/mascotblog.webp" width={340} height={354} className="page-mascot" />
+          </div>
         </div>
       </header>
 

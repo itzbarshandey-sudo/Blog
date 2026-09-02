@@ -4,7 +4,9 @@ import SectionHeader from '../components/ui/SectionHeader.jsx';
 import LearnMoreLink from '../components/ui/LearnMoreLink.jsx';
 import SkillCard from '../components/ui/SkillCard.jsx';
 import PostCard from '../components/ui/PostCard.jsx';
+import Mascot from '../components/ui/Mascot.jsx';
 import useScrollReveal from '../hooks/useScrollReveal.js';
+import useParallax from '../hooks/useParallax.js';
 import { postsList } from '../data/posts.js';
 import './Home.css';
 
@@ -43,6 +45,7 @@ const skills = [
 
 export default function Home() {
   const revealRef = useScrollReveal();
+  const mascotRef = useParallax(20);
   const taglineRef = useRef(null);
 
   // Tagline reveal — word by word activation on scroll
@@ -102,8 +105,8 @@ export default function Home() {
               1 post published &nbsp;·&nbsp; Actively learning &nbsp;·&nbsp; Kolkata, India
             </p>
           </div>
-          <div className="hero-art" aria-hidden="true">
-            <img src="/assets/mascot.webp" alt="" className="hero-mascot" width="380" height="396" />
+          <div className="hero-art" aria-hidden="true" ref={mascotRef}>
+            <Mascot src="/assets/mascot.webp" width={380} height={396} className="hero-mascot" />
           </div>
         </div>
       </header>
@@ -134,7 +137,7 @@ export default function Home() {
             title="Notes, write-ups,<br />lessons learned."
             action={<LearnMoreLink to="/blog" className="btn btn-ghost btn-sm">All posts</LearnMoreLink>}
           />
-          <div className="post-grid">
+          <div className="post-grid reveal-stagger is-active">
             {featuredPosts.length > 0 ? (
               featuredPosts.map((p, i) => <PostCard key={p.slug} post={p} delay={i} />)
             ) : (
@@ -152,7 +155,7 @@ export default function Home() {
             title="Skills in progress,<br />not just on paper."
             action={<LearnMoreLink to="/resume" className="btn btn-ghost btn-sm">Full resume</LearnMoreLink>}
           />
-          <div className="skills-grid">
+          <div className="skills-grid reveal-stagger is-active">
             {skills.map((s, i) => <SkillCard key={i} {...s} />)}
           </div>
         </div>

@@ -3,3 +3,42 @@
 @import './layout.css';
 @import './components.css';
 @import './transitions.css';
+@import '../components/ui/Mascot.css';
+@import '../components/transitions/PageTransition.css';
+
+/* ─── Page Hero (shared) ───────────────────────────────────────── */
+.page-hero {
+  padding: 140px 0 60px;
+  position: relative;
+  overflow: hidden;
+}
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at top left, rgba(45, 158, 66, 0.08), transparent 50%),
+    radial-gradient(ellipse at bottom right, rgba(77, 171, 247, 0.04), transparent 50%);
+  pointer-events: none;
+}
+.page-hero > .wrap { position: relative; z-index: 1; }
+.page-title { margin: 1rem 0 1.5rem; }
+.page-sub { font-size: 1.1rem; max-width: 600px; color: var(--fg-muted); }
+.page-hero-wrap {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+.page-hero-art {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media (max-width: 720px) {
+  .page-hero-wrap {
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
+  .page-hero-art { order: -1; max-width: 240px; margin: 0 auto; }
+}

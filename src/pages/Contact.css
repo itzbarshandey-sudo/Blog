@@ -1,18 +1,105 @@
-.contact-section { padding: 3rem 0 5rem; }
+.contact-section { padding: 2rem 0 5rem; position: relative; }
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr 1.4fr;
-  gap: 2rem;
+  gap: 2.5rem;
   align-items: flex-start;
 }
-.contact-info .card h3 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 1rem; }
-.contact-info .link-row {
-  display: block; padding: 0.4rem 0;
-  font-size: 0.9rem; color: var(--fg-muted);
-  text-decoration: none;
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: sticky;
+  top: 100px;
 }
-.contact-info .link-row:hover { color: var(--accent); }
+
+.contact-info .card {
+  position: relative;
+  overflow: hidden;
+}
+.contact-info .card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  opacity: 0.6;
+}
+
+.contact-info .card h3 {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 1.25rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+
+.contact-info .link-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0;
+  font-size: 0.92rem;
+  color: var(--fg-muted);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s var(--ease-smooth-out), border-color 0.2s;
+  word-break: break-all;
+}
+.contact-info .link-row::before {
+  content: '→';
+  color: var(--accent);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.2s, transform 0.2s;
+  flex-shrink: 0;
+}
+.contact-info .link-row:hover {
+  color: var(--accent);
+}
+.contact-info .link-row:hover::before {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.contact-promise ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.contact-promise li {
+  font-size: 0.88rem;
+  color: var(--fg-muted);
+  padding-left: 1.2rem;
+  position: relative;
+}
+.contact-promise li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* Form card polish */
+.contact-section .form-card {
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.contact-section .form-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
 
 @media (max-width: 960px) {
-  .contact-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .contact-info { position: static; }
+  .contact-section .form-card { padding: 1.75rem; }
 }

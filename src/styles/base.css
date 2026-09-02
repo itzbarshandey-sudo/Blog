@@ -9,7 +9,23 @@ body {
   overflow-x: hidden;
   min-height: 100vh;
   font-size: 16px;
+  animation: body-enter 0.4s var(--ease-out) both;
 }
+@keyframes body-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Custom scrollbar — subtle, fits the dark theme */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 5px;
+  border: 2px solid var(--bg);
+  transition: background 0.2s;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--border-strong); }
 
 h1, h2, h3, h4 { font-weight: 700; line-height: 1.15; color: var(--fg); letter-spacing: -0.02em; }
 h1 { font-size: clamp(2.5rem, 5.5vw, 3.75rem); font-weight: 800; }

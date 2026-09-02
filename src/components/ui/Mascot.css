@@ -1,0 +1,57 @@
+/* Mascot — used in hero sections of every page */
+.mascot-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.mascot-glow {
+  position: absolute;
+  inset: 12% 18%;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(45, 158, 66, 0.18) 0%,
+    rgba(45, 158, 66, 0.05) 40%,
+    transparent 70%
+  );
+  filter: blur(8px);
+  z-index: 0;
+  animation: mascot-pulse 5s ease-in-out infinite;
+}
+
+@keyframes mascot-pulse {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.06); }
+}
+
+.mascot-img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.4));
+  animation: mascot-float 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes mascot-float {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-14px) rotate(0.5deg); }
+}
+
+/* Hover: the mascot reacts to the pointer — leans toward it slightly */
+.mascot-wrap:hover .mascot-img {
+  animation-play-state: paused;
+  transform: translateY(-6px) rotate(2deg) scale(1.02);
+  transition: transform 400ms var(--ease-smooth-out);
+}
+.mascot-wrap:hover .mascot-glow {
+  animation-play-state: paused;
+  opacity: 1.2;
+  transform: scale(1.1);
+  transition: transform 400ms var(--ease-smooth-out), opacity 400ms;
+}

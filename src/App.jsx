@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Routes, Route, useLocation, Outlet } from 'react-router-dom';
 import SiteNav from './components/layout/SiteNav.jsx';
 import SiteFooter from './components/layout/SiteFooter.jsx';
+import PageTransition from './components/transitions/PageTransition.jsx';
 import Home from './pages/Home.jsx';
 import Blog from './pages/Blog.jsx';
 import Post from './pages/Post.jsx';
@@ -12,7 +13,7 @@ import NotFound from './pages/NotFound.jsx';
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: 'auto' });
   }, [pathname]);
   return null;
 }
@@ -31,7 +32,7 @@ function Layout() {
 
 export default function App() {
   return (
-    <>
+    <PageTransition>
       <ScrollToTop />
       <Routes>
         <Route element={<Layout />}>
@@ -43,6 +44,6 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
-    </>
+    </PageTransition>
   );
 }

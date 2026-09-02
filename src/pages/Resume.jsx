@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import Button from '../components/ui/Button.jsx';
+import Mascot from '../components/ui/Mascot.jsx';
 import useScrollReveal from '../hooks/useScrollReveal.js';
 import profile from '../data/profile.js';
 import './Resume.css';
@@ -18,16 +19,21 @@ export default function Resume() {
   return (
     <div ref={revealRef} className="print-resume">
       <header className="page-hero print-hide">
-        <div className="wrap">
-          <p className="section-label">
-            <span className="label-dot"></span>
-            Open to internships and entry-level roles
-          </p>
-          <h1 className="page-title">Resume</h1>
-          <p className="page-sub">Building provable security skills through labs, CTFs, and consistent writing — documented here as I grow.</p>
-          <div className="hero-cta">
-            <Button href="#" variant="primary" onClick={(e) => { e.preventDefault(); window.print(); }}>Download / print PDF</Button>
-            <Button to="/contact" variant="ghost">Get in touch</Button>
+        <div className="wrap page-hero-wrap">
+          <div className="page-hero-copy">
+            <p className="section-label">
+              <span className="label-dot"></span>
+              Open to internships and entry-level roles
+            </p>
+            <h1 className="page-title">Resume</h1>
+            <p className="page-sub">Building provable security skills through labs, CTFs, and consistent writing — documented here as I grow.</p>
+            <div className="hero-cta">
+              <Button href="#" variant="primary" onClick={(e) => { e.preventDefault(); window.print(); }}>Download / print PDF</Button>
+              <Button to="/contact" variant="ghost">Get in touch</Button>
+            </div>
+          </div>
+          <div className="page-hero-art" aria-hidden="true">
+            <Mascot src="/assets/mascotresume.webp" width={340} height={354} className="page-mascot" />
           </div>
         </div>
       </header>
